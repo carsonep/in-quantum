@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IQ-OS Lite | AI-Powered Application Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --raven-black: #0A0A0A;
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --odin-silver: #C0C5CE;
+            --cubist-white: #F5F7FA;
+            --fragment-red: #C13832;
+            --valhalla-gold: #E8C547;
+            --mimir-cyan: #00ACC1;
+            --yggdrasil-green: #2ECC71;
+            --terminal-green: #00FF41;
+            --purple-accent: #9B59B6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--raven-black);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 40px;
+            background: 
+                linear-gradient(180deg, var(--raven-black) 0%, rgba(11, 27, 61, 0.8) 100%),
+                radial-gradient(circle at 70% 30%, rgba(155, 89, 182, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 30% 70%, rgba(0, 172, 193, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--purple-accent);
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 span {
+            color: var(--mimir-cyan);
+            font-weight: 600;
+        }
+
+        .hero-text .tagline {
+            font-size: 20px;
+            color: var(--odin-silver);
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .hero-text .description {
+            font-size: 16px;
+            color: var(--odin-silver);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 300ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cyan {
+            background: var(--mimir-cyan);
+            color: var(--raven-black);
+        }
+
+        .btn-cyan:hover {
+            background: white;
+        }
+
+        .btn-ghost {
+            border: 1px solid var(--odin-silver);
+            color: white;
+        }
+
+        .btn-ghost:hover {
+            background: white;
+            color: var(--raven-black);
+        }
+
+        /* Terminal Window */
+        .terminal {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+        }
+
+        .terminal-header {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #FF5F56; }
+        .terminal-dot.yellow { background: #FFBD2E; }
+        .terminal-dot.green { background: #27C93F; }
+
+        .terminal-title {
+            margin-left: 12px;
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
+
+        .terminal-body {
+            padding: 24px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+        }
+
+        .terminal-prompt {
+            color: var(--purple-accent);
+        }
+
+        .terminal-command {
+            color: white;
+        }
+
+        .terminal-output {
+            color: var(--odin-silver);
+        }
+
+        .terminal-success {
+            color: var(--yggdrasil-green);
+        }
+
+        .terminal-accent {
+            color: var(--valhalla-gold);
+        }
+
+        .terminal-cyan {
+            color: var(--mimir-cyan);
+        }
+
+        /* Sections */
+        .section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--fragment-red);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--odin-silver);
+            max-width: 700px;
+            margin: 24px auto 0;
+            line-height: 1.7;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 64px auto 0;
+        }
+
+        .problem-card {
+            background: rgba(193, 56, 50, 0.1);
+            border: 1px solid rgba(193, 56, 50, 0.3);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .problem-stat {
+            font-family: 'Space Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--fragment-red);
+            margin-bottom: 12px;
+        }
+
+        .problem-label {
+            font-size: 14px;
+            color: var(--odin-silver);
+            line-height: 1.5;
+        }
+
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .pain-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+        }
+
+        .pain-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--mimir-cyan);
+            margin-bottom: 12px;
+        }
+
+        .pain-desc {
+            font-size: 15px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        /* Flow Section */
+        .flow-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .flow-steps {
+            max-width: 800px;
+            margin: 64px auto 0;
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            align-items: flex-start;
+        }
+
+        .flow-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--mimir-cyan);
+            background: rgba(0, 172, 193, 0.1);
+            border: 1px solid var(--mimir-cyan);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .flow-content {
+            flex: 1;
+        }
+
+        .flow-input {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--valhalla-gold);
+            background: rgba(0,0,0,0.4);
+            padding: 16px 20px;
+            border-left: 3px solid var(--valhalla-gold);
+            margin-bottom: 12px;
+        }
+
+        .flow-desc {
+            font-size: 15px;
+            color: var(--odin-silver);
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: var(--odin-silver);
+            font-size: 20px;
+            margin: 16px 0;
+            margin-left: 64px;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            background: linear-gradient(180deg, var(--raven-black) 0%, var(--chagall) 100%);
+            padding: 120px 40px;
+        }
+
+        .comparison-table {
+            max-width: 900px;
+            margin: 64px auto 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 16px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .comparison-table th:first-child {
+            color: var(--odin-silver);
+        }
+
+        .comparison-table th:nth-child(2) {
+            color: var(--fragment-red);
+        }
+
+        .comparison-table th:nth-child(3) {
+            color: var(--mimir-cyan);
+        }
+
+        .comparison-table td {
+            padding: 20px 24px;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table td:first-child {
+            color: var(--odin-silver);
+        }
+
+        .comparison-table .bad {
+            color: var(--fragment-red);
+        }
+
+        .comparison-table .good {
+            color: var(--yggdrasil-green);
+        }
+
+        /* Architecture Section */
+        .arch-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 64px auto 0;
+        }
+
+        .arch-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+            position: relative;
+            transition: all 300ms ease;
+        }
+
+        .arch-card:hover {
+            border-color: var(--mimir-cyan);
+            transform: translateY(-4px);
+        }
+
+        .arch-card-highlight {
+            background: rgba(155, 89, 182, 0.1);
+            border-color: var(--purple-accent);
+        }
+
+        .arch-card-highlight::before {
+            content: 'MULTI-PROVIDER';
+            position: absolute;
+            top: -10px;
+            left: 24px;
+            background: var(--purple-accent);
+            color: white;
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+        }
+
+        .arch-icon {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--odin-silver);
+        }
+
+        .arch-card-highlight .arch-icon {
+            color: var(--purple-accent);
+        }
+
+        .arch-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--mimir-cyan);
+            margin-bottom: 8px;
+        }
+
+        .arch-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .arch-desc {
+            font-size: 14px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        /* Providers Grid */
+        .providers-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .provider-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            transition: all 300ms ease;
+        }
+
+        .provider-item:hover {
+            border-color: var(--purple-accent);
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        .provider-name {
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .provider-note {
+            font-size: 10px;
+            color: var(--odin-silver);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .provider-primary {
+            border-color: var(--mimir-cyan);
+            background: rgba(0, 172, 193, 0.05);
+        }
+
+        /* Scaffold Section */
+        .scaffold-section {
+            background: linear-gradient(180deg, var(--raven-black) 0%, var(--chagall) 100%);
+            padding: 120px 40px;
+        }
+
+        .scaffold-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .scaffold-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            transition: all 300ms ease;
+        }
+
+        .scaffold-item:hover {
+            border-color: var(--valhalla-gold);
+        }
+
+        .scaffold-type {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--valhalla-gold);
+            margin-bottom: 8px;
+        }
+
+        .scaffold-use {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .scaffold-example {
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
+
+        /* QA Pipeline */
+        .qa-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .qa-pipeline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            max-width: 900px;
+            margin: 64px auto 0;
+            flex-wrap: wrap;
+        }
+
+        .qa-stage {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .qa-stage:hover {
+            border-color: var(--yggdrasil-green);
+        }
+
+        .qa-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--yggdrasil-green);
+            margin-bottom: 12px;
+        }
+
+        .qa-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .qa-desc {
+            font-size: 13px;
+            color: var(--odin-silver);
+        }
+
+        .qa-arrow {
+            font-size: 24px;
+            color: var(--odin-silver);
+        }
+
+        .qa-result {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid var(--yggdrasil-green);
+            padding: 32px 48px;
+            text-align: center;
+            margin: 48px auto 0;
+            max-width: 400px;
+        }
+
+        .qa-result-stat {
+            font-family: 'Space Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--yggdrasil-green);
+        }
+
+        .qa-result-label {
+            font-size: 14px;
+            color: var(--odin-silver);
+            margin-top: 8px;
+        }
+
+        /* Market Section */
+        .market-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .market-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .market-tam {
+            font-family: 'Space Mono', monospace;
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--valhalla-gold);
+            margin-bottom: 16px;
+        }
+
+        .market-tam-label {
+            font-size: 18px;
+            color: var(--odin-silver);
+        }
+
+        .market-segments {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 64px auto 0;
+        }
+
+        .segment-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+            transition: all 300ms ease;
+        }
+
+        .segment-card:hover {
+            border-color: var(--valhalla-gold);
+            transform: translateY(-4px);
+        }
+
+        .segment-card.primary {
+            border-color: var(--mimir-cyan);
+            background: rgba(0, 172, 193, 0.05);
+        }
+
+        .segment-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--mimir-cyan);
+            margin-bottom: 16px;
+        }
+
+        .segment-size {
+            font-family: 'Space Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--valhalla-gold);
+            margin-bottom: 8px;
+        }
+
+        .segment-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .segment-pain {
+            font-size: 13px;
+            color: var(--odin-silver);
+            margin-bottom: 8px;
+        }
+
+        .segment-value {
+            font-size: 13px;
+            color: var(--yggdrasil-green);
+        }
+
+        /* Competitors Section */
+        .competitors-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .competitors-table {
+            max-width: 900px;
+            margin: 64px auto 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .competitors-table th {
+            text-align: left;
+            padding: 16px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            color: var(--odin-silver);
+        }
+
+        .competitors-table td {
+            padding: 20px 24px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .competitors-table td:first-child {
+            font-family: 'Space Mono', monospace;
+            color: var(--fragment-red);
+        }
+
+        .competitors-table td:nth-child(2) {
+            color: var(--odin-silver);
+        }
+
+        .competitors-table td:nth-child(3) {
+            color: var(--yggdrasil-green);
+        }
+
+        /* Moat Section */
+        .moat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 800px;
+            margin: 48px auto 0;
+        }
+
+        .moat-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .moat-item:hover {
+            border-color: var(--mimir-cyan);
+        }
+
+        .moat-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--mimir-cyan);
+        }
+
+        .moat-text {
+            font-size: 14px;
+            color: var(--odin-silver);
+        }
+
+        /* Status Section */
+        .status-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            max-width: 1000px;
+            margin: 64px auto 0;
+        }
+
+        .status-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+        }
+
+        .status-card-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--yggdrasil-green);
+            margin-bottom: 24px;
+        }
+
+        .status-list {
+            list-style: none;
+        }
+
+        .status-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+        }
+
+        .status-check {
+            color: var(--yggdrasil-green);
+        }
+
+        .status-feature {
+            color: white;
+            flex: 1;
+        }
+
+        .status-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            padding: 4px 8px;
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--yggdrasil-green);
+        }
+
+        .progress-card {
+            background: rgba(232, 197, 71, 0.05);
+            border-color: var(--valhalla-gold);
+        }
+
+        .progress-card .status-card-title {
+            color: var(--valhalla-gold);
+        }
+
+        .progress-item {
+            margin-bottom: 20px;
+        }
+
+        .progress-label {
+            font-size: 13px;
+            color: var(--odin-silver);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--yggdrasil-green);
+            border-radius: 4px;
+        }
+
+        .progress-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+        }
+
+        .progress-stat .value {
+            color: var(--yggdrasil-green);
+        }
+
+        .progress-stat .label {
+            color: var(--odin-silver);
+        }
+
+        /* Roadmap Section */
+        .roadmap-section {
+            background: linear-gradient(180deg, var(--chagall) 0%, var(--raven-black) 100%);
+            padding: 120px 40px;
+        }
+
+        .roadmap-timeline {
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .roadmap-quarter {
+            margin-bottom: 48px;
+        }
+
+        .quarter-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .quarter-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--mimir-cyan);
+            background: rgba(0, 172, 193, 0.1);
+            padding: 8px 16px;
+            border: 1px solid var(--mimir-cyan);
+        }
+
+        .quarter-title {
+            font-size: 18px;
+            color: var(--odin-silver);
+        }
+
+        .roadmap-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-left: 40px;
+        }
+
+        .roadmap-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+        }
+
+        .roadmap-feature {
+            font-size: 15px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-impact {
+            font-size: 13px;
+            color: var(--odin-silver);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 64px auto 0;
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+            text-align: center;
+            transition: all 300ms ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--mimir-cyan);
+            transform: translateY(-4px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--valhalla-gold);
+            background: rgba(232, 197, 71, 0.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            display: block;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--valhalla-gold);
+            margin-bottom: 16px;
+        }
+
+        .pricing-tier {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--mimir-cyan);
+            margin-bottom: 16px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .pricing-price span {
+            font-size: 14px;
+            color: var(--odin-silver);
+        }
+
+        .pricing-target {
+            font-size: 13px;
+            color: var(--odin-silver);
+            margin-bottom: 24px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            font-size: 13px;
+            color: var(--odin-silver);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Risks Section */
+        .risks-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .risks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 64px auto 0;
+        }
+
+        .risk-category {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+        }
+
+        .risk-category-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--fragment-red);
+            margin-bottom: 24px;
+        }
+
+        .risk-item {
+            margin-bottom: 20px;
+        }
+
+        .risk-name {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .risk-mitigation {
+            font-size: 13px;
+            color: var(--yggdrasil-green);
+            padding-left: 16px;
+            border-left: 2px solid var(--yggdrasil-green);
+        }
+
+        /* Funds Section */
+        .funds-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .funds-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            max-width: 1000px;
+            margin: 64px auto 0;
+        }
+
+        .allocation-chart {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+        }
+
+        .allocation-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--mimir-cyan);
+            margin-bottom: 32px;
+        }
+
+        .allocation-item {
+            margin-bottom: 24px;
+        }
+
+        .allocation-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .allocation-label {
+            font-size: 14px;
+            color: white;
+        }
+
+        .allocation-percent {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--valhalla-gold);
+        }
+
+        .allocation-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .allocation-fill {
+            height: 100%;
+            background: var(--mimir-cyan);
+            border-radius: 4px;
+        }
+
+        .milestones-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+        }
+
+        .milestones-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--valhalla-gold);
+            margin-bottom: 32px;
+        }
+
+        .milestone-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .milestone-quarter {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--mimir-cyan);
+            min-width: 60px;
+        }
+
+        .milestone-content {
+            flex: 1;
+        }
+
+        .milestone-name {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .milestone-metric {
+            font-size: 13px;
+            color: var(--odin-silver);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(180deg, var(--raven-black) 0%, var(--chagall) 100%);
+            padding: 120px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .big-quote {
+            font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 300;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .big-quote strong {
+            color: var(--mimir-cyan);
+            font-weight: 600;
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .summary-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .summary-item:hover {
+            border-color: var(--yggdrasil-green);
+        }
+
+        .summary-check {
+            color: var(--yggdrasil-green);
+            font-size: 18px;
+        }
+
+        .summary-text {
+            font-size: 15px;
+            color: var(--odin-silver);
+            line-height: 1.6;
+        }
+
+        .summary-cta {
+            text-align: center;
+            margin-top: 64px;
+        }
+
+        .summary-ask {
+            font-size: 20px;
+            color: white;
+            margin-bottom: 32px;
+        }
+
+        .summary-note {
+            font-size: 14px;
+            color: var(--odin-silver);
+            font-style: italic;
+            margin-top: 48px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--raven-black);
+            padding: 48px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .providers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pain-points {
+                grid-template-columns: 1fr;
+            }
+
+            .arch-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scaffold-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .market-segments {
+                grid-template-columns: 1fr;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap-items {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .risks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .funds-content {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .moat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="eyebrow">AI-POWERED APPLICATION BUILDER</div>
+                <h1>IQ-OS <span>Lite</span></h1>
+                <p class="tagline">"Describe it. Build it. Ship it."</p>
+                <p class="description">A web-based platform that transforms natural language descriptions into working software applications. Users describe what they want in plain English—the system generates complete, functional code that runs immediately in the browser.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-cyan">Try IQ-OS Lite</a>
+                    <a href="#" class="btn btn-ghost">View Demo →</a>
+                </div>
+            </div>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">iq-os — generation</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">→ </span>
+                        <span class="terminal-command">"Build me a task management app with categories and due dates"</span>
+                    </div>
+                    <div class="terminal-line"><br></div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Analyzing request...</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Selected scaffold: </span><span class="terminal-accent">Next.js App</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Generating components...</span>
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-cyan">├─</span> TaskList.tsx
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-cyan">├─</span> CategoryFilter.tsx
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-cyan">├─</span> DatePicker.tsx
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-cyan">└─</span> page.tsx
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">QA pipeline: </span><span class="terminal-success">PASSED</span>
+                    </div>
+                    <div class="terminal-line"><br></div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">●</span> <span class="terminal-output">Live preview ready at </span><span class="terminal-accent">localhost:3000</span>
+                    </div>
+                    <div class="terminal-line"><br></div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">→ </span>
+                        <span class="terminal-command">"Add a dark mode toggle"</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Updated in </span><span class="terminal-accent">2.3s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="problem-section">
+        <div class="section-header">
+            <div class="section-label">THE PROBLEM</div>
+            <h2 class="section-title">Software Development is Broken</h2>
+        </div>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-stat">Months</div>
+                <div class="problem-label">Learning curve for programming</div>
+            </div>
+            <div class="problem-card">
+                <div class="problem-stat">$150K+</div>
+                <div class="problem-label">Annual cost per developer</div>
+            </div>
+            <div class="problem-card">
+                <div class="problem-stat">Weeks</div>
+                <div class="problem-label">Even for simple applications</div>
+            </div>
+            <div class="problem-card">
+                <div class="problem-stat">70%</div>
+                <div class="problem-label">Projects fail to meet goals</div>
+            </div>
+        </div>
+
+        <div class="pain-points">
+            <div class="pain-card">
+                <div class="pain-title">SMBs & ENTERPRISES</div>
+                <div class="pain-desc">Need internal tools but can't justify development teams. IT backlogs stretch 6-18 months while shadow IT proliferates.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-title">ENTREPRENEURS</div>
+                <div class="pain-desc">Have app ideas but no technical skills. Left choosing between expensive agencies or learning to code themselves.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-title">DEVELOPERS</div>
+                <div class="pain-desc">Spend 40%+ of their time on repetitive setup and boilerplate code instead of solving actual problems.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-title">THE RESULT</div>
+                <div class="pain-desc">Billions in unrealized value. Ideas that never ship. Organizations running on spreadsheets and manual processes.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="flow-section">
+        <div class="section-header">
+            <div class="section-label">HOW IT WORKS</div>
+            <h2 class="section-title">From Idea to Application in Seconds</h2>
+        </div>
+
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="flow-num">01</div>
+                <div class="flow-content">
+                    <div class="flow-input">"Build me a task management app with categories and due dates"</div>
+                    <div class="flow-desc">User describes what they want in plain English. No technical knowledge required.</div>
+                </div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">02</div>
+                <div class="flow-content">
+                    <div class="flow-desc">AI analyzes the request and selects the appropriate project template (scaffold) from our library.</div>
+                </div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">03</div>
+                <div class="flow-content">
+                    <div class="flow-desc">System generates complete, working code across multiple files—components, styling, logic.</div>
+                </div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">04</div>
+                <div class="flow-content">
+                    <div class="flow-desc">Live preview shows the running application in the browser. Working prototype in seconds.</div>
+                </div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">05</div>
+                <div class="flow-content">
+                    <div class="flow-input">"Add a dark mode toggle"</div>
+                    <div class="flow-desc">User iterates with natural language. Changes appear in real-time.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison-section">
+        <div class="section-header">
+            <div class="section-label">THE DIFFERENCE</div>
+            <h2 class="section-title">Traditional Development vs. IQ-OS Lite</h2>
+        </div>
+
+        <table class="comparison-table">
+            <tr>
+                <th>Metric</th>
+                <th>Traditional Development</th>
+                <th>IQ-OS Lite</th>
+            </tr>
+            <tr>
+                <td>Time to working prototype</td>
+                <td class="bad">Days to weeks</td>
+                <td class="good">Seconds to minutes</td>
+            </tr>
+            <tr>
+                <td>Technical skill required</td>
+                <td class="bad">Years of experience</td>
+                <td class="good">None</td>
+            </tr>
+            <tr>
+                <td>Cost per application</td>
+                <td class="bad">$10K - $100K+</td>
+                <td class="good">Subscription-based</td>
+            </tr>
+            <tr>
+                <td>Iteration speed</td>
+                <td class="bad">Hours to days</td>
+                <td class="good">Real-time</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Architecture -->
+    <section class="arch-section">
+        <div class="section-header">
+            <div class="section-label">TECHNICAL ARCHITECTURE</div>
+            <h2 class="section-title">Built for Quality & Flexibility</h2>
+        </div>
+
+        <div class="arch-grid">
+            <div class="arch-card arch-card-highlight">
+                <div class="arch-icon">8×</div>
+                <div class="arch-name">AI PROVIDERS</div>
+                <div class="arch-title">Multi-Provider Strategy</div>
+                <div class="arch-desc">Not dependent on any single AI vendor. Redundancy, cost optimization, and access to specialized models for different tasks.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">⬡</div>
+                <div class="arch-name">SCAFFOLDS</div>
+                <div class="arch-title">Project Templates</div>
+                <div class="arch-desc">Pre-configured templates with AI Rules that give models the context needed to generate correct, production-quality code.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">✓</div>
+                <div class="arch-name">QA PIPELINE</div>
+                <div class="arch-title">3-Stage Validation</div>
+                <div class="arch-desc">Syntax check, auto-fix, and LLM validation. Achieves 90%+ success rate for code working without modification.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Providers -->
+    <section class="providers-section">
+        <div class="section-header">
+            <div class="section-label">AI INTEGRATION</div>
+            <h2 class="section-title">8 Providers. No Vendor Lock-in.</h2>
+        </div>
+
+        <div class="providers-grid">
+            <div class="provider-item provider-primary">
+                <div class="provider-name">Azure AI Foundry</div>
+                <div class="provider-note">Primary · Enterprise-grade</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">Anthropic Claude</div>
+                <div class="provider-note">Leading reasoning</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">Google Gemini</div>
+                <div class="provider-note">Multimodal understanding</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">OpenAI</div>
+                <div class="provider-note">o1, o3 reasoning models</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">OpenRouter</div>
+                <div class="provider-note">200+ models</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">Ollama</div>
+                <div class="provider-note">Local deployment</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">LM Studio</div>
+                <div class="provider-note">Air-gapped option</div>
+            </div>
+            <div class="provider-item">
+                <div class="provider-name">+ More</div>
+                <div class="provider-note">Extensible architecture</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scaffolds -->
+    <section class="scaffold-section">
+        <div class="section-header">
+            <div class="section-label">SCAFFOLD SYSTEM</div>
+            <h2 class="section-title">Templates for Every Use Case</h2>
+            <p class="section-subtitle">Each scaffold includes AI Rules—structured instructions ensuring generated code actually works in our preview system.</p>
+        </div>
+
+        <div class="scaffold-grid">
+            <div class="scaffold-item">
+                <div class="scaffold-type">Next.js App</div>
+                <div class="scaffold-use">Full web applications</div>
+                <div class="scaffold-example">Dashboards, e-commerce, portals</div>
+            </div>
+            <div class="scaffold-item">
+                <div class="scaffold-type">React Component</div>
+                <div class="scaffold-use">UI components</div>
+                <div class="scaffold-example">Forms, data tables, charts</div>
+            </div>
+            <div class="scaffold-item">
+                <div class="scaffold-type">API</div>
+                <div class="scaffold-use">Backend services</div>
+                <div class="scaffold-example">REST endpoints, data processing</div>
+            </div>
+            <div class="scaffold-item">
+                <div class="scaffold-type">Python Script</div>
+                <div class="scaffold-use">Data analysis</div>
+                <div class="scaffold-example">CSV processing, visualizations</div>
+            </div>
+            <div class="scaffold-item">
+                <div class="scaffold-type">Static HTML</div>
+                <div class="scaffold-use">Landing pages</div>
+                <div class="scaffold-example">Marketing sites, documentation</div>
+            </div>
+            <div class="scaffold-item">
+                <div class="scaffold-type">Vite + React</div>
+                <div class="scaffold-use">Single-page apps</div>
+                <div class="scaffold-example">Interactive tools, calculators</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QA Pipeline -->
+    <section class="qa-section">
+        <div class="section-header">
+            <div class="section-label">QUALITY ASSURANCE</div>
+            <h2 class="section-title">3-Stage Validation Pipeline</h2>
+        </div>
+
+        <div class="qa-pipeline">
+            <div class="qa-stage">
+                <div class="qa-num">STAGE 1</div>
+                <div class="qa-name">Syntax Check</div>
+                <div class="qa-desc">Instant validation, no AI needed</div>
+            </div>
+            <div class="qa-arrow">→</div>
+            <div class="qa-stage">
+                <div class="qa-num">STAGE 2</div>
+                <div class="qa-name">Auto-Fix</div>
+                <div class="qa-desc">Automatically corrects common issues</div>
+            </div>
+            <div class="qa-arrow">→</div>
+            <div class="qa-stage">
+                <div class="qa-num">STAGE 3</div>
+                <div class="qa-name">LLM Validation</div>
+                <div class="qa-desc">Background verification for complex patterns</div>
+            </div>
+        </div>
+
+        <div class="qa-result">
+            <div class="qa-result-stat">90%+</div>
+            <div class="qa-result-label">Code works without modification</div>
+        </div>
+    </section>
+
+    <!-- Market -->
+    <section class="market-section">
+        <div class="section-header">
+            <div class="section-label">MARKET OPPORTUNITY</div>
+            <h2 class="section-title">Total Addressable Market</h2>
+        </div>
+
+        <div class="market-header">
+            <div class="market-tam">$187B</div>
+            <div class="market-tam-label">Low-code/no-code market by 2030 (Gartner) · 25%+ CAGR</div>
+        </div>
+
+        <div class="market-segments">
+            <div class="segment-card primary">
+                <div class="segment-badge">PRIMARY TARGET</div>
+                <div class="segment-size">$45B</div>
+                <div class="segment-name">Enterprise Internal Tools</div>
+                <div class="segment-pain">Pain: IT backlog, shadow IT</div>
+                <div class="segment-value">Value: Azure-compliant, enterprise-ready AI development</div>
+            </div>
+            <div class="segment-card">
+                <div class="segment-badge">SEGMENT 2</div>
+                <div class="segment-size">$28B</div>
+                <div class="segment-name">SMB Application Development</div>
+                <div class="segment-pain">Pain: Can't afford developers</div>
+                <div class="segment-value">Value: Build custom tools without technical staff</div>
+            </div>
+            <div class="segment-card">
+                <div class="segment-badge">SEGMENT 3</div>
+                <div class="segment-size">$15B</div>
+                <div class="segment-name">Developer Productivity</div>
+                <div class="segment-pain">Pain: Time spent on boilerplate</div>
+                <div class="segment-value">Value: 10x faster prototyping</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitors -->
+    <section class="competitors-section">
+        <div class="section-header">
+            <div class="section-label">COMPETITIVE LANDSCAPE</div>
+            <h2 class="section-title">Direct Competitors</h2>
+        </div>
+
+        <table class="competitors-table">
+            <tr>
+                <th>Competitor</th>
+                <th>Their Strength</th>
+                <th>IQ-OS Lite Advantage</th>
+            </tr>
+            <tr>
+                <td>Replit</td>
+                <td>Large user base</td>
+                <td>More enterprise-focused, Azure compliance</td>
+            </tr>
+            <tr>
+                <td>Bolt.new</td>
+                <td>Fast generation</td>
+                <td>Multi-scaffold support, better QA pipeline</td>
+            </tr>
+            <tr>
+                <td>v0 (Vercel)</td>
+                <td>UI generation</td>
+                <td>Full application generation, not just components</td>
+            </tr>
+            <tr>
+                <td>Cursor</td>
+                <td>Developer-focused</td>
+                <td>Accessible to non-developers</td>
+            </tr>
+        </table>
+
+        <div class="section-header" style="margin-top: 64px; margin-bottom: 32px;">
+            <div class="section-label">MOAT & DEFENSIBILITY</div>
+        </div>
+
+        <div class="moat-grid">
+            <div class="moat-item">
+                <div class="moat-num">01</div>
+                <div class="moat-text">Multi-provider architecture — Not locked to any single AI vendor</div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-num">02</div>
+                <div class="moat-text">Scaffold + AI Rules system — Proprietary approach to code generation quality</div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-num">03</div>
+                <div class="moat-text">QA pipeline — Higher success rates than competitors</div>
+            </div>
+            <div class="moat-item">
+                <div class="moat-num">04</div>
+                <div class="moat-text">Enterprise compliance — Azure AD ready, data residency options</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Status -->
+    <section class="status-section">
+        <div class="section-header">
+            <div class="section-label">CURRENT STATE</div>
+            <h2 class="section-title">v0.1.1 — Production Ready</h2>
+        </div>
+
+        <div class="status-grid">
+            <div class="status-card">
+                <div class="status-card-title">WHAT'S WORKING</div>
+                <ul class="status-list">
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">AI chat with streaming</span>
+                        <span class="status-badge">PRODUCTION</span>
+                    </li>
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">6 scaffold types</span>
+                        <span class="status-badge">PRODUCTION</span>
+                    </li>
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">Live preview system</span>
+                        <span class="status-badge">PRODUCTION</span>
+                    </li>
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">Code QA pipeline</span>
+                        <span class="status-badge">PRODUCTION</span>
+                    </li>
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">Python execution (in-browser)</span>
+                        <span class="status-badge">PRODUCTION</span>
+                    </li>
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">Project export (ZIP)</span>
+                        <span class="status-badge">PRODUCTION</span>
+                    </li>
+                    <li>
+                        <span class="status-check">✓</span>
+                        <span class="status-feature">Memory system (personalization)</span>
+                        <span class="status-badge">UI CONNECTED</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="status-card progress-card">
+                <div class="status-card-title">RECENT PROGRESS (PATCHES 2.0-2.5)</div>
+                
+                <div class="progress-item">
+                    <div class="progress-label">Preview reliability</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%"></div>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="label">~60% → 95%</span>
+                        <span class="value">+35%</span>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">Test coverage</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%"></div>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="label">158 tests</span>
+                        <span class="value">94%</span>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">Azure AI models available</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="label">Integration complete</span>
+                        <span class="value">20+</span>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">Reasoning model support</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="label">o1, DeepSeek-R1, Grok-4</span>
+                        <span class="value">LIVE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="roadmap-section">
+        <div class="section-header">
+            <div class="section-label">ROADMAP</div>
+            <h2 class="section-title">Path to Market Leadership</h2>
+        </div>
+
+        <div class="roadmap-timeline">
+            <div class="roadmap-quarter">
+                <div class="quarter-header">
+                    <div class="quarter-label">Q1 2026</div>
+                    <div class="quarter-title">Near-Term</div>
+                </div>
+                <div class="roadmap-items">
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Agent flows (multi-step)</div>
+                        <div class="roadmap-impact">Handle complex requirements automatically</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Split editor view</div>
+                        <div class="roadmap-impact">Better developer experience</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Template gallery</div>
+                        <div class="roadmap-impact">Faster onboarding, more use cases</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roadmap-quarter">
+                <div class="quarter-header">
+                    <div class="quarter-label">Q2-Q3 2026</div>
+                    <div class="quarter-title">Medium-Term</div>
+                </div>
+                <div class="roadmap-items">
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Presentation mode</div>
+                        <div class="roadmap-impact">New market segment (Gamma competitor)</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Azure AD integration</div>
+                        <div class="roadmap-impact">Enterprise sales enablement</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Semantic memory search</div>
+                        <div class="roadmap-impact">Better personalization, retention</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roadmap-quarter">
+                <div class="quarter-header">
+                    <div class="quarter-label">Q4 2026+</div>
+                    <div class="quarter-title">Long-Term</div>
+                </div>
+                <div class="roadmap-items">
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Multi-user collaboration</div>
+                        <div class="roadmap-impact">Team licenses, higher ACV</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Mobile deployment</div>
+                        <div class="roadmap-impact">PWA/React Native export</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-feature">Computer vision agents</div>
+                        <div class="roadmap-impact">Browser automation capabilities</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section">
+        <div class="section-header">
+            <div class="section-label">BUSINESS MODEL</div>
+            <h2 class="section-title">Proposed Pricing Strategy</h2>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-tier">FREE</div>
+                <div class="pricing-price">$0</div>
+                <div class="pricing-target">Individual exploration</div>
+                <ul class="pricing-features">
+                    <li>10 projects</li>
+                    <li>Community models</li>
+                    <li>Basic preview</li>
+                </ul>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-tier">PRO</div>
+                <div class="pricing-price">$29<span>/mo</span></div>
+                <div class="pricing-target">Individual developers</div>
+                <ul class="pricing-features">
+                    <li>Unlimited projects</li>
+                    <li>Premium AI models</li>
+                    <li>Full export</li>
+                    <li>Priority support</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-tier">TEAM</div>
+                <div class="pricing-price">$99<span>/seat/mo</span></div>
+                <div class="pricing-target">Small teams</div>
+                <ul class="pricing-features">
+                    <li>Everything in Pro</li>
+                    <li>Collaboration</li>
+                    <li>Shared projects</li>
+                    <li>Team analytics</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-tier">ENTERPRISE</div>
+                <div class="pricing-price">Custom</div>
+                <div class="pricing-target">Large organizations</div>
+                <ul class="pricing-features">
+                    <li>Azure deployment</li>
+                    <li>SSO integration</li>
+                    <li>SLA guarantee</li>
+                    <li>Dedicated support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risks -->
+    <section class="risks-section">
+        <div class="section-header">
+            <div class="section-label">RISK FACTORS</div>
+            <h2 class="section-title">Identified Risks & Mitigations</h2>
+        </div>
+
+        <div class="risks-grid">
+            <div class="risk-category">
+                <div class="risk-category-title">TECHNICAL RISKS</div>
+                <div class="risk-item">
+                    <div class="risk-name">AI API cost escalation</div>
+                    <div class="risk-mitigation">Multi-provider architecture, model selection optimization</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-name">Preview system limitations</div>
+                    <div class="risk-mitigation">WebContainers/Sandpack upgrade path documented</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-name">Code generation quality</div>
+                    <div class="risk-mitigation">QA pipeline, strengthened AI rules</div>
+                </div>
+            </div>
+
+            <div class="risk-category">
+                <div class="risk-category-title">MARKET RISKS</div>
+                <div class="risk-item">
+                    <div class="risk-name">Large player enters market</div>
+                    <div class="risk-mitigation">Speed to market, enterprise focus, multi-provider advantage</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-name">AI capability plateau</div>
+                    <div class="risk-mitigation">Architecture supports new models as they emerge</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-name">Enterprise sales cycle</div>
+                    <div class="risk-mitigation">Product-led growth for pipeline, land-and-expand</div>
+                </div>
+            </div>
+
+            <div class="risk-category">
+                <div class="risk-category-title">EXECUTION RISKS</div>
+                <div class="risk-item">
+                    <div class="risk-name">Technical debt</div>
+                    <div class="risk-mitigation">Clean-room implementation, comprehensive testing</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-name">Scaling challenges</div>
+                    <div class="risk-mitigation">Cloud-native architecture from day one</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-name">Talent acquisition</div>
+                    <div class="risk-mitigation">Modern tech stack (Next.js 15, React 19, TypeScript)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use of Funds -->
+    <section class="funds-section">
+        <div class="section-header">
+            <div class="section-label">INVESTMENT</div>
+            <h2 class="section-title">Use of Funds</h2>
+        </div>
+
+        <div class="funds-content">
+            <div class="allocation-chart">
+                <div class="allocation-title">PROPOSED ALLOCATION</div>
+                
+                <div class="allocation-item">
+                    <div class="allocation-header">
+                        <span class="allocation-label">Engineering</span>
+                        <span class="allocation-percent">50%</span>
+                    </div>
+                    <div class="allocation-bar">
+                        <div class="allocation-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+
+                <div class="allocation-item">
+                    <div class="allocation-header">
+                        <span class="allocation-label">Product (UX, Design, PM)</span>
+                        <span class="allocation-percent">20%</span>
+                    </div>
+                    <div class="allocation-bar">
+                        <div class="allocation-fill" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <div class="allocation-item">
+                    <div class="allocation-header">
+                        <span class="allocation-label">Go-to-Market</span>
+                        <span class="allocation-percent">20%</span>
+                    </div>
+                    <div class="allocation-bar">
+                        <div class="allocation-fill" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <div class="allocation-item">
+                    <div class="allocation-header">
+                        <span class="allocation-label">Operations (Legal, G&A)</span>
+                        <span class="allocation-percent">10%</span>
+                    </div>
+                    <div class="allocation-bar">
+                        <div class="allocation-fill" style="width: 10%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestones-card">
+                <div class="milestones-title">KEY MILESTONES</div>
+                
+                <div class="milestone-item">
+                    <div class="milestone-quarter">Q1 2026</div>
+                    <div class="milestone-content">
+                        <div class="milestone-name">Beta Launch</div>
+                        <div class="milestone-metric">1,000 active users</div>
+                    </div>
+                </div>
+
+                <div class="milestone-item">
+                    <div class="milestone-quarter">Q2 2026</div>
+                    <div class="milestone-content">
+                        <div class="milestone-name">Enterprise Pilot</div>
+                        <div class="milestone-metric">3 paid enterprise customers</div>
+                    </div>
+                </div>
+
+                <div class="milestone-item">
+                    <div class="milestone-quarter">Q3 2026</div>
+                    <div class="milestone-content">
+                        <div class="milestone-name">GA Launch</div>
+                        <div class="milestone-metric">10,000 users, $100K ARR</div>
+                    </div>
+                </div>
+
+                <div class="milestone-item">
+                    <div class="milestone-quarter">Q4 2026</div>
+                    <div class="milestone-content">
+                        <div class="milestone-name">Series A Metrics</div>
+                        <div class="milestone-metric">$500K ARR, 50 enterprise accounts</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+        <p class="big-quote">IQ-OS Lite is building the future of software development—where <strong>anyone can create applications by describing what they want in plain English.</strong></p>
+    </section>
+
+    <!-- Summary -->
+    <section class="summary-section">
+        <div class="section-header">
+            <div class="section-label">SUMMARY</div>
+            <h2 class="section-title">What's Compelling</h2>
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-item">
+                <span class="summary-check">✓</span>
+                <span class="summary-text">Working product with 95%+ preview success rate</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-check">✓</span>
+                <span class="summary-text">Multi-provider AI architecture (not dependent on any single vendor)</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-check">✓</span>
+                <span class="summary-text">Enterprise-ready with Azure compliance</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-check">✓</span>
+                <span class="summary-text">Strong engineering foundation (94% test coverage)</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-check">✓</span>
+                <span class="summary-text">Clear roadmap from current state to Gold Standard architecture</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-check">✓</span>
+                <span class="summary-text">$187B TAM with clear path to enterprise segment</span>
+            </div>
+        </div>
+
+        <div class="summary-cta">
+            <p class="summary-ask">Investment to accelerate development, build the team, and capture the enterprise market opportunity before larger players establish dominance.</p>
+            <a href="#" class="btn btn-cyan">Schedule Discussion</a>
+            <a href="#" class="btn btn-ghost">Technical Deep Dive →</a>
+            <p class="summary-note">For additional technical details, please refer to the Complete Implementation Plan document—a 35-page deep dive into the architecture, migration strategy, and technical specifications.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">IQ-OS LITE · AI-POWERED APPLICATION BUILDER · INVESTMENT OVERVIEW · 2025</p>
+    </footer>
+</body>
+</html>
