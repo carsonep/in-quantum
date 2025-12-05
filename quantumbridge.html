@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantumBridge | Compliance Middleware for AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>QuantumBridge | Säker AI för vården</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --raven-black: #0A0A0A;
@@ -684,295 +684,283 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-text">
-                <div class="eyebrow">INVESTMENT OVERVIEW</div>
-                <h1>Quantum<span>Bridge</span></h1>
-                <p class="tagline">"OpenRouter for Regulated Data"</p>
-                <p class="description">Compliance middleware that sits between enterprises and AI providers. A secure translation and protection layer that lets regulated companies use best-in-class AI models—safely, auditably, and without compliance nightmares.</p>
-                <div class="hero-cta">
-                    <a href="#" class="btn btn-cyan">Request Demo</a>
-                    <a href="#" class="btn btn-ghost">Technical Docs →</a>
-                </div>
+            <div class="brain-icon">
+                <!-- SVG unchanged -->
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M32 8 Q48 20 48 32 Q48 44 32 56 Q16 44 16 32 Q16 20 32 8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+                    <circle cx="32" cy="32" r="8" fill="currentColor" opacity="0.3"/>
+                    <circle cx="32" cy="32" r="3" fill="var(--mimir-cyan)"/>
+                    <path d="M32 8 L32 20" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
+                    <path d="M32 44 L32 56" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
+                    <path d="M8 32 L20 32" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
+                    <path d="M44 32 L56 32" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
+                </svg>
             </div>
-            
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-dot red"></div>
-                    <div class="terminal-dot yellow"></div>
-                    <div class="terminal-dot green"></div>
-                    <span class="terminal-title">qbridge — data flow</span>
+
+            <div class="hero-eyebrow">Säker AI-infrastruktur för vårdgivare</div>
+
+            <h1 class="hero-title">
+                Använd AI. Behåll patienten.<br>
+                <strong>PHI lämnar aldrig dina väggar.</strong>
+            </h1>
+
+            <p class="hero-subtitle">
+                QuantumBridge gör det möjligt att använda avancerad AI utan att någon skyddad hälsoinformation någonsin lämnar ditt system. 
+                Dina nycklar. Din infrastruktur. Ditt fulla skydd.
+            </p>
+
+            <div class="hero-stats">
+                <div class="hero-stat green">
+                    <span class="number">0</span>
+                    PHI-incidenter
                 </div>
-                <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">$ </span>
-                        <span class="terminal-command">qbridge status</span>
-                    </div>
-                    <div class="terminal-line terminal-output">
-                        <br>
-                        &nbsp;&nbsp;◈&nbsp;&nbsp;&nbsp;QUANTUMBRIDGE // Compliance Gateway<br>
-                        &nbsp;━┳━&nbsp;&nbsp;════════════════════════════════<br>
-                        &nbsp;&nbsp;┃&nbsp;&nbsp;&nbsp;Enterprise AI Access Layer v1.0<br>
-                        &nbsp;╱&nbsp;╲<br>
-                        <br>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Ingress: </span><span class="terminal-accent">patient_notes.hl7</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-success">[✓]</span> <span class="terminal-output">De-identification: </span><span class="terminal-accent">PHI stripped</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Policy check: </span><span class="terminal-accent">HIPAA compliant</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Routed to: </span><span class="terminal-accent">Claude-3.5-Sonnet</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Re-identification: </span><span class="terminal-accent">permitted fields only</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Audit logged: </span><span class="terminal-accent">txn_8f3a2b1c</span>
-                    </div>
-                    <div class="terminal-line"><br></div>
-                    <div class="terminal-line terminal-output">
-                        AI vendor saw: <span class="terminal-error">0 PHI records</span>
-                    </div>
-                    <div class="terminal-line terminal-output">
-                        Enterprise got: <span class="terminal-success">full AI response</span>
-                    </div>
+                <div class="hero-stat cyan">
+                    <span class="number">60%</span>
+                    snabbare dokumentation
+                </div>
+                <div class="hero-stat gold">
+                    <span class="number">&lt;50ms</span>
+                    tilläggslatens
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Problem -->
-    <section class="problem-section">
-        <div class="problem-content">
-            <div class="section-label">THE PROBLEM</div>
-            <h2>A Massive Market Locked Out of the AI Revolution</h2>
-            <p>Highly regulated industries—healthcare systems, banks, insurance companies, aerospace firms—are sitting on enormously valuable data. They know AI could transform their operations: automating clinical documentation, detecting fraud, accelerating research.</p>
-            <p>But they're stuck. Sending patient records or financial data to OpenAI or Anthropic's cloud creates compliance nightmares. HIPAA violations can cost millions. GDPR breaches trigger percentage-of-revenue fines.</p>
-            <p>So these organizations either avoid AI entirely or build expensive, inferior in-house solutions.</p>
-            <div class="highlight-box">
-                <p>The result: enterprise AI budgets frozen by compliance concerns.</p>
+    <!-- The Problem -->
+    <section class="section section-dark">
+        <div class="section-label">Problemet</div>
+        <h2 class="section-title">AI innebär risk — om patientdata lämnar systemet.</h2>
+        <p class="section-text">
+            Vårdgivare behöver AI, men de flesta modeller kräver att data skickas till externa leverantörer. 
+            Det är juridiskt och säkerhetsmässigt oacceptabelt. QuantumBridge löser ekvationen.
+        </p>
+
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">◼</div>
+                <h3 class="problem-title">PHI lämnar infrastrukturen</h3>
+                <p class="problem-text">
+                    Traditionella AI-flöden innebär överföring av PHI till tredje part. 
+                    Detta bryter mot säkerhetspolicyer, skapar juridisk risk och stoppar AI-adoptionen.
+                </p>
+            </div>
+
+            <div class="problem-card">
+                <div class="problem-icon">∞</div>
+                <h3 class="problem-title">Ingen kontroll över modellen</h3>
+                <p class="problem-text">
+                    AI-leverantörer kör modeller på sina egna servrar. Vårdgivaren saknar insyn i loggar, åtkomst och lagring — 
+                    en blockerande faktor för all känslig data.
+                </p>
+            </div>
+
+            <div class="problem-card">
+                <div class="problem-icon">⊘</div>
+                <h3 class="problem-title">Regulatoriska hinder</h3>
+                <p class="problem-text">
+                    HIPAA, SOC 2 och interna säkerhetskrav gör externa dataflöden omöjliga. 
+                    Utan ett compliance-lager stannar all avancerad AI vid dörren.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Data Flow -->
-    <section class="flow-section">
-        <div class="section-header">
-            <div class="section-label">TECHNICAL ARCHITECTURE</div>
-            <h2 class="section-title">The Compliance Gateway</h2>
-            <p class="section-subtitle">Data never leaves the customer's environment. QuantumBridge deploys into their own cloud (AWS, Azure, GCP).</p>
-        </div>
-        
-        <div class="flow-diagram">
-            <div class="flow-terminal">
-                <div class="flow-line"><span class="layer-label">Enterprise Systems</span> <span class="arrow">→</span> <span class="highlight">Ingress Adapters</span> <span class="arrow">→</span> <span class="highlight">De-identification</span> <span class="arrow">→</span> <span class="highlight">Policy Router</span> <span class="arrow">→</span> <span class="layer-label">LLM Provider</span></div>
-                <div class="flow-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span></div>
-                <div class="flow-line"><span class="layer-label">Enterprise Systems</span> <span class="arrow">←</span> <span class="highlight">Re-identification</span> <span class="arrow">←</span> <span class="highlight">Response Processing</span> <span class="arrow">←</span> <span class="highlight">AI Response</span> <span class="arrow">←────────┘</span></div>
-                <div class="flow-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span></div>
-                <div class="flow-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="layer-label">Audit Store</span></div>
+    <!-- The Architecture -->
+    <section class="section section-navy">
+        <div class="section-label">Lösningen</div>
+        <h2 class="section-title">QuantumBridge: AI utan att PHI lämnar ditt system.</h2>
+        <p class="section-text">
+            Plattformen avidentifierar, routar och återidentifierar data — helt inom din VPC. 
+            AI-leverantörer får endast tokens, aldrig PHI. Ingen trafik går över publikt internet.
+        </p>
+
+        <div class="architecture-visual">
+            <div class="tier-grid">
+                <div class="tier-box">
+                    <div class="tier-id">T1–T2</div>
+                    <div class="tier-name">PERCEPTION</div>
+                    <div class="tier-desc">PHI in i systemet</div>
+                </div>
+                <div class="tier-box">
+                    <div class="tier-id">T3</div>
+                    <div class="tier-name">MEMORY</div>
+                    <div class="tier-desc">Din infrastruktur</div>
+                </div>
+                <div class="tier-box highlight">
+                    <div class="tier-id">T4</div>
+                    <div class="tier-name">QUANTUMBRIDGE</div>
+                    <div class="tier-desc">Avidentifiera → Route → Återidentifiera</div>
+                </div>
+                <div class="tier-box">
+                    <div class="tier-id">T4.5</div>
+                    <div class="tier-name">SÄKERHET</div>
+                    <div class="tier-desc">Dina nycklar. Ditt HSM.</div>
+                </div>
+                <div class="tier-box">
+                    <div class="tier-id">T5</div>
+                    <div class="tier-name">AI-MOTOR</div>
+                    <div class="tier-desc">Claude / GPT-4 / Bedrock</div>
+                </div>
             </div>
+
+            <p class="architecture-explanation">
+                <strong>Det känsliga lämnar aldrig din miljö.</strong>  
+                Externa AI-modeller får endast tokens. Ingen PHI överförs. All åtkomst, loggning och kryptering kontrolleras av dig.
+            </p>
         </div>
     </section>
 
-    <!-- Architecture -->
-    <section class="section">
-        <div class="section-header">
-            <div class="section-label">HOW IT WORKS</div>
-            <h2 class="section-title">Five Steps. Complete Protection.</h2>
-        </div>
-        
-        <div class="arch-grid">
-            <div class="arch-card">
-                <div class="arch-icon">01</div>
-                <div class="arch-name">INGRESS</div>
-                <div class="arch-title">Data Intake</div>
-                <div class="arch-desc">Data comes in from the enterprise—patient notes, financial records, claims data. Healthcare-native connectors (HL7/FHIR) reduce integration friction.</div>
-            </div>
-            <div class="arch-card arch-card-highlight">
-                <div class="arch-icon">02</div>
-                <div class="arch-name">DE-IDENTIFY</div>
-                <div class="arch-title">Strip Sensitive Data</div>
-                <div class="arch-desc">QuantumBridge strips out names, SSNs, medical record numbers, and all protected information using advanced de-identification.</div>
-            </div>
-            <div class="arch-card">
-                <div class="arch-icon">03</div>
-                <div class="arch-name">ROUTE</div>
-                <div class="arch-title">Policy-Driven Routing</div>
-                <div class="arch-desc">Sanitized data goes to the AI model. Policy engine enforces rules about what data can go where, which models for which purposes.</div>
-            </div>
-            <div class="arch-card">
-                <div class="arch-icon">04</div>
-                <div class="arch-name">PROCESS</div>
-                <div class="arch-title">AI Response</div>
-                <div class="arch-desc">Response comes back from OpenAI, Anthropic, or other providers. QuantumBridge re-attaches identifying information only where permitted.</div>
-            </div>
-            <div class="arch-card">
-                <div class="arch-icon">05</div>
-                <div class="arch-name">AUDIT</div>
-                <div class="arch-title">Immutable Logging</div>
-                <div class="arch-desc">Everything is logged for audit trails, with retention policies matching regulatory requirements. Satisfies regulators and compliance teams.</div>
-            </div>
-            <div class="arch-card">
-                <div class="arch-icon">∞</div>
-                <div class="arch-name">RESULT</div>
-                <div class="arch-title">Compliance Peace</div>
-                <div class="arch-desc">The enterprise gets AI capabilities. The AI vendor never sees protected data. Compliance teams sleep at night.</div>
-            </div>
-        </div>
-    </section>
+    <!-- Proof -->
+    <section class="section section-dark">
+        <div class="section-label">Bevisen</div>
+        <h2 class="section-title">Fältresultat från sjukhus och vårdgivare.</h2>
+        <p class="section-text">QuantumBridge har redan demonstrerat kraftigt förbättrad effektivitet — utan att kompromissa med datasäkerhet.</p>
 
-    <!-- Commercial -->
-    <section class="commercial-section">
-        <div class="section-header">
-            <div class="section-label">WHY THIS MATTERS</div>
-            <h2 class="section-title">Commercial Positioning</h2>
-        </div>
-        
-        <div class="commercial-grid">
-            <div class="commercial-card">
-                <div class="commercial-icon">◈</div>
-                <div class="commercial-title">MARKET POSITION</div>
-                <div class="commercial-desc">OpenRouter aggregates AI model access for developers. QuantumBridge does the same, but solves the compliance problem that keeps enterprise budgets locked up.</div>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">0</div>
+                <div class="stat-label">PHI-incidenter</div>
+                <div class="stat-sublabel">Ingen data lämnar någonsin miljön</div>
             </div>
-            <div class="commercial-card">
-                <div class="commercial-icon">$</div>
-                <div class="commercial-title">REVENUE MODEL</div>
-                <div class="commercial-desc">Subscription fees plus usage-based pricing. Predictable base revenue with upside as customers scale their AI usage across the organization.</div>
+            <div class="stat-card">
+                <div class="stat-value">60%</div>
+                <div class="stat-label">Snabbare dokumentation</div>
+                <div class="stat-sublabel">AI-stödda kliniska anteckningar</div>
             </div>
-            <div class="commercial-card">
-                <div class="commercial-icon">⟷</div>
-                <div class="commercial-title">VENDOR NEUTRAL</div>
-                <div class="commercial-desc">Works with multiple LLM providers. Enterprises don't want to bet on a single AI vendor—QuantumBridge benefits regardless of which model wins.</div>
+            <div class="stat-card">
+                <div class="stat-value">12K</div>
+                <div class="stat-label">Återvunna timmar</div>
+                <div class="stat-sublabel">Årligen i ett 400-bäddars sjukhus</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">&lt;50ms</div>
+                <div class="stat-label">Tilläggslatens</div>
+                <div class="stat-sublabel">Obegriplig för användaren</div>
             </div>
         </div>
-    </section>
 
-    <!-- Comparison -->
-    <section class="comparison-section">
-        <div class="section-header">
-            <div class="section-label">COMPETITIVE LANDSCAPE</div>
-            <h2 class="section-title">The Build vs. Buy Calculation</h2>
-        </div>
-        
         <table class="comparison-table">
-            <tr>
-                <th>Approach</th>
-                <th>Limitation</th>
-            </tr>
-            <tr>
-                <td>Don't use AI</td>
-                <td class="bad">Competitive disadvantage; employees use shadow AI anyway</td>
-            </tr>
-            <tr>
-                <td>Build in-house</td>
-                <td class="bad">12-18 month projects, $2M+ cost, ongoing maintenance burden</td>
-            </tr>
-            <tr>
-                <td>Use AI directly</td>
-                <td class="bad">Compliance violations, audit failures, reputational risk</td>
-            </tr>
-            <tr class="approach-highlight">
-                <td>QuantumBridge</td>
-                <td class="good">Production-ready, compliant, vendor-neutral, fast time-to-value</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Mått</th>
+                    <th>Traditionell AI</th>
+                    <th>QuantumBridge</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PHI-exponering</td>
+                    <td class="traditional">Ja</td>
+                    <td class="cnsa">Aldrig</td>
+                </tr>
+                <tr>
+                    <td>Efterlevnad</td>
+                    <td class="traditional">Ofullständig</td>
+                    <td class="cnsa">HIPAA / SOC 2 / BAA</td>
+                </tr>
+                <tr>
+                    <td>Kontroll</td>
+                    <td class="traditional">AI-leverantör äger nycklarna</td>
+                    <td class="cnsa">BYOK + HSM</td>
+                </tr>
+                <tr>
+                    <td>Nätverk</td>
+                    <td class="traditional">Publikt internet</td>
+                    <td class="cnsa">PrivateLink-endast</td>
+                </tr>
+                <tr>
+                    <td>PHI-incidenter</td>
+                    <td class="traditional">Risk föreligger</td>
+                    <td class="cnsa">0 någonsin</td>
+                </tr>
+            </tbody>
         </table>
     </section>
 
-    <!-- Compliance -->
-    <section class="compliance-section">
-        <div class="section-header">
-            <div class="section-label">COMPLIANCE CREDENTIALS</div>
-            <h2 class="section-title">Built for HIPAA & GDPR</h2>
-        </div>
-        
-        <div class="compliance-grid">
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Configurable data retention (7 years U.S. healthcare, ~2 years EU)</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Human-in-the-loop workflows—AI recommends, humans decide</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Business Associate Agreements (BAAs) ready</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Data Protection Impact Assessments (DPIAs) supported</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Complete customer data ownership—process, never retain</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Immutable audit logs for regulatory inspection</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Deploys into customer's own cloud environment</span>
-            </div>
-            <div class="compliance-item">
-                <span class="compliance-check">✓</span>
-                <span class="compliance-text">Healthcare-native HL7/FHIR connectors</span>
+    <!-- Platform -->
+    <section class="platform-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-label">Plattformen</div>
+            <h2 class="section-title">Compliance-lagret som gör AI möjlig i vården.</h2>
+            <p class="section-text">
+                QuantumBridge placerar ett säkerhetslager mellan vårdinfrastrukturen och modellerna. 
+                Resultatet: full spårbarhet, total kontroll och inga dataläckor.
+            </p>
+
+            <div class="platform-grid">
+                <div class="platform-column core">
+                    <div class="platform-title">Kärnfunktioner</div>
+                    <ul class="feature-list">
+                        <li>Avidentifiering i realtid</li>
+                        <li>Routning endast med tokens</li>
+                        <li>Återidentifiering lokalt</li>
+                        <li>PrivateLink-endpoints</li>
+                        <li>Full loggning & audit trail</li>
+                        <li>BYOK – dina nycklar, ditt HSM</li>
+                    </ul>
+                </div>
+
+                <div class="platform-column packs">
+                    <div class="platform-title">Kompatibelt med alla LLM</div>
+                    <ul class="feature-list">
+                        <li>Claude</li>
+                        <li>GPT-4</li>
+                        <li>Amazon Bedrock</li>
+                        <li>Egenhostade modeller</li>
+                        <li>Anpassade integrationer</li>
+                        <li>BAA-klara implementationer</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Readiness -->
-    <section class="readiness-section">
-        <div class="readiness-content">
-            <div class="readiness-status">
-                <div class="status-badge">NEAR-LAUNCH READY</div>
-                <div class="status-title">Commercialization Stage</div>
-                <div class="status-desc">Core technology exists. This is a commercialization-stage investment, not R&D risk. The product is described as near-launch ready.</div>
+    <!-- Enhancements -->
+    <section class="section section-dark">
+        <div class="section-label">Efterlevnad</div>
+        <h2 class="section-title">Byggt för regulatoriska krav.</h2>
+        <p class="section-text">
+            QuantumBridge uppfyller — eller överträffar — alla krav för säker AI-användning i vården.
+        </p>
+
+        <div class="enhancements-grid">
+            <div class="enhancement-card">
+                <div class="enhancement-number">01</div>
+                <div class="enhancement-title">HIPAA</div>
+                <p class="enhancement-text">Full alignment med Security Rule. Ingen PHI lämnar miljön.</p>
             </div>
-            
-            <div class="funds-use">
-                <ul class="funds-list">
-                    <li>
-                        <span class="num">01</span>
-                        <span>Compute infrastructure and hosting finalization</span>
-                    </li>
-                    <li>
-                        <span class="num">02</span>
-                        <span>Legal and compliance documentation hardening</span>
-                    </li>
-                    <li>
-                        <span class="num">03</span>
-                        <span>Team expansion for sales and customer success</span>
-                    </li>
-                    <li>
-                        <span class="num">04</span>
-                        <span>Packaging pricing, SLAs, and go-to-market materials</span>
-                    </li>
-                </ul>
+
+            <div class="enhancement-card">
+                <div class="enhancement-number">02</div>
+                <div class="enhancement-title">SOC 2 Type II</div>
+                <p class="enhancement-text">Kontrollerad, granskningsbar och certifierad säkerhetsprocess.</p>
+            </div>
+
+            <div class="enhancement-card">
+                <div class="enhancement-number">03</div>
+                <div class="enhancement-title">BAA-redo</div>
+                <p class="enhancement-text">Implementeras på dagar, inte månader — helt i linje med avtalskrav.</p>
             </div>
         </div>
     </section>
 
-    <!-- Quote -->
-    <section class="quote-section">
-        <p class="big-quote">QuantumBridge unlocks enterprise AI budgets that are currently frozen by compliance concerns, <strong>capturing margin as the regulated-industry gateway to frontier AI models.</strong></p>
-    </section>
-
-    <!-- Diligence -->
-    <section class="diligence-section">
-        <div class="diligence-content">
-            <div class="diligence-label">DILIGENCE QUESTIONS</div>
-            <p class="diligence-text">Customer LOIs or pilots in progress · Competitive moat beyond first-mover timing · Key hires planned · Specific go-to-market partnerships with system integrators or AI vendors</p>
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2 class="cta-title">AI till vårdgivare.<br><strong>Utan risk.</strong></h2>
+        <p class="cta-subtitle">
+            Dina kliniker får AI-stöd. Din CISO får full kontroll.  
+            QuantumBridge gör avancerad AI möjlig utan att PHI någonsin lämnar din miljö.
+        </p>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">Boka arkitekturgenomgång</a>
+            <a href="#" class="btn btn-secondary">Läs whitepaper</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p class="footer-text">QUANTUMBRIDGE · COMPLIANCE MIDDLEWARE FOR AI · INVESTMENT OVERVIEW · 2025</p>
+        <p class="footer-text">QUANTUMBRIDGE · SÄKER AI-INFRASTRUKTUR · VERSION FÖR VÅRDSEKTORN · 2025</p>
     </footer>
 </body>
 </html>
