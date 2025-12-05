@@ -3,587 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantumBridge | Säker AI för vården</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>QuantumBridge | Efterlevnadsmellanvara för AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-     :root {
-  --raven-black: #0A0A0A;
-  --chagall: #0B1B3D;
-  --moonlit: #1E3A5F;
-  --odin-silver: #C0C5CE;
-  --cubist-white: #F5F7FA;
-  --fragment-red: #C13832;
-  --valhalla-gold: #E8C547;
-  --mimir-cyan: #00ACC1;
-  --yggdrasil-green: #2ECC71;
-}
+        :root {
+            --raven-black: #0A0A0A;
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --odin-silver: #C0C5CE;
+            --cubist-white: #F5F7FA;
+            --fragment-red: #C13832;
+            --valhalla-gold: #E8C547;
+            --mimir-cyan: #00ACC1;
+            --yggdrasil-green: #2ECC71;
+            --terminal-green: #00FF41;
+        }
 
-•⁠  ⁠{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-  font-family: 'DM Sans', -apple-system, sans-serif;
-  background: var(--raven-black);
-  color: var(--cubist-white);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--raven-black);
+            color: white;
+            line-height: 1.6;
+        }
 
-/* Hero */
-.hero {
-  padding: 6rem 2rem;
-  text-align: center;
-  background: var(--chagall);
-}
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 40px;
+            background: 
+                linear-gradient(180deg, var(--raven-black) 0%, rgba(11, 27, 61, 0.8) 100%),
+                radial-gradient(circle at 30% 50%, rgba(0, 172, 193, 0.1) 0%, transparent 50%);
+        }
 
-.hero-content {
-  max-width: 900px;
-  margin: 0 auto;
-}
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
 
-.hero-eyebrow {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--mimir-cyan);
-  margin-bottom: 1rem;
-}
+        .hero-text .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--mimir-cyan);
+            margin-bottom: 16px;
+        }
 
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
+        .hero-text h1 {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
 
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: var(--odin-silver);
-  margin-bottom: 2rem;
-}
+        .hero-text h1 span {
+            color: var(--mimir-cyan);
+            font-weight: 600;
+        }
 
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
+        .hero-text .tagline {
+            font-size: 20px;
+            color: var(--odin-silver);
+            margin-bottom: 32px;
+            font-style: italic;
+        }
 
-.hero-stat {
-  font-size: 1rem;
-  text-align: center;
-}
+        .hero-text .description {
+            font-size: 16px;
+            color: var(--odin-silver);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
 
-.hero-stat .number {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+        }
 
-.hero-stat.green .number { color: var(--yggdrasil-green); }
-.hero-stat.cyan .number { color: var(--mimir-cyan); }
-.hero-stat.gold .number { color: var(--valhalla-gold); }
+        .btn {
+            padding: 14px 28px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 300ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* Sections */
-.section {
-  padding: 4rem 2rem;
-}
+        .btn-cyan {
+            background: var(--mimir-cyan);
+            color: var(--raven-black);
+        }
 
-.section-dark {
-  background: var(--moonlit);
-}
+        .btn-cyan:hover {
+            background: white;
+        }
 
-.section-navy {
-  background: var(--chagall);
-}
+        .btn-ghost {
+            border: 1px solid var(--odin-silver);
+            color: white;
+        }
 
-.section-label {
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  color: var(--valhalla-gold);
-  margin-bottom: 1rem;
-}
+        .btn-ghost:hover {
+            background: white;
+            color: var(--raven-black);
+        }
 
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
+        /* Terminal Window */
+        .terminal {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+        }
 
-.section-text {
-  max-width: 800px;
-  margin-bottom: 2rem;
-  color: var(--odin-silver);
-}
+        .terminal-header {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* Problem Grid */
-.problem-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
 
-.problem-card {
-  background: var(--raven-black);
-  padding: 1.5rem;
-  border-radius: 8px;
-}
+        .terminal-dot.red { background: #FF5F56; }
+        .terminal-dot.yellow { background: #FFBD2E; }
+        .terminal-dot.green { background: #27C93F; }
 
-.problem-title {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
+        .terminal-title {
+            margin-left: 12px;
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
 
-/* Architecture */
-.tier-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
+        .terminal-body {
+            padding: 24px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
 
-.tier-box {
-  background: var(--moonlit);
-  padding: 1rem;
-  border-radius: 6px;
-  text-align: center;
-  flex: 1 1 150px;
-}
+        .terminal-line {
+            margin-bottom: 8px;
+        }
 
-.tier-box.highlight {
-  border: 2px solid var(--mimir-cyan);
-}
+        .terminal-prompt {
+            color: var(--mimir-cyan);
+        }
 
-/* Stats Row */
-.stats-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-}
+        .terminal-command {
+            color: white;
+        }
 
-.stat-card {
-  background: var(--raven-black);
-  padding: 1.5rem;
-  border-radius: 8px;
-  text-align: center;
-  flex: 1 1 200px;
-}
+        .terminal-output {
+            color: var(--odin-silver);
+        }
 
-.stat-value {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--mimir-cyan);
-}
+        .terminal-success {
+            color: var(--yggdrasil-green);
+        }
 
-/* Comparison Table */
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-}
+        .terminal-accent {
+            color: var(--valhalla-gold);
+        }
 
-.comparison-table th,
-.comparison-table td {
-  border: 1px solid var(--odin-silver);
-  padding: 0.75rem;
-  text-align: center;
-}
+        .terminal-error {
+            color: var(--fragment-red);
+        }
 
-.comparison-table th {
-  background: var(--chagall);
-}
+        /* Problem Section */
+        .problem-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
 
-.traditional {
-  color: var(--fragment-red);
-}
+        .problem-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-.cnsa {
-  color: var(--yggdrasil-green);
-}
+        .problem-content .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--fragment-red);
+            margin-bottom: 24px;
+        }
 
-/* Platform Grid */
-.platform-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
+        .problem-content h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 32px;
+            letter-spacing: -1px;
+        }
 
-.platform-column {
-  flex: 1 1 300px;
-}
+        .problem-content p {
+            font-size: 18px;
+            color: var(--odin-silver);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
 
-.platform-title {
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
+        .problem-content .highlight-box {
+            background: rgba(193, 56, 50, 0.15);
+            border-left: 3px solid var(--fragment-red);
+            padding: 24px 32px;
+            margin-top: 40px;
+        }
 
-.feature-list {
-  list-style: none;
-}
+        .problem-content .highlight-box p {
+            font-size: 20px;
+            color: white;
+            margin: 0;
+            font-weight: 500;
+        }
 
-.feature-list li {
-  margin-bottom: 0.5rem;
-}
+        /* Architecture Section */
+        .section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* Enhancements */
-.enhancements-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
 
-.enhancement-card {
-  flex: 1 1 200px;
-  background: var(--raven-black);
-  padding: 1.5rem;
-  border-radius: 8px;
-}
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--fragment-red);
+            margin-bottom: 16px;
+        }
 
-.enhancement-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--valhalla-gold);
-  margin-bottom: 0.5rem;
-}
+        .section-title {
+            font-size: 40px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
 
-/* CTA */
-.cta-section {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: var(--chagall);
-}
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--odin-silver);
+            max-width: 700px;
+            margin: 24px auto 0;
+            line-height: 1.7;
+        }
 
-.cta-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
+        /* Flow Diagram */
+        .flow-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
 
-.cta-subtitle {
-  color: var(--odin-silver);
-  margin-bottom: 2rem;
-}
+        .flow-diagram {
+            max-width: 1000px;
+            margin: 64px auto 0;
+        }
 
-.cta-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
+        .flow-terminal {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 2;
+            overflow-x: auto;
+        }
 
-.btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-}
+        .flow-terminal .flow-line {
+            white-space: nowrap;
+        }
 
-.btn-primary {
-  background: var(--mimir-cyan);
-  color: var(--raven-black);
-}
+        .flow-terminal .layer-label {
+            color: var(--mimir-cyan);
+        }
 
-.btn-secondary {
-  background: var(--valhalla-gold);
-  color: var(--raven-black);
-}
+        .flow-terminal .arrow {
+            color: var(--odin-silver);
+        }
 
-/* Footer */
-.footer {
-  background: var(--moonlit);
-  text-align: center;
-  padding: 1rem;
-}
+        .flow-terminal .highlight {
+            color: var(--valhalla-gold);
+        }
 
-.footer-text {
-  font-size: 0.8rem;
-  color: var(--odin-silver);
-}
+        /* Architecture Grid */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .arch-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+            position: relative;
+            transition: all 300ms ease;
+        }
+
+        .arch-card:hover {
+            border-color: var(--mimir-cyan);
+            transform: translateY(-4px);
+        }
+
+        .arch-card-highlight {
+            background: rgba(0, 172, 193, 0.1);
+            border-color: var(--mimir-cyan);
+        }
+
+        .arch-card-highlight::before {
+            content: 'KÄRNVÄRDE';
+            position: absolute;
+            top: -10px;
+            left: 24px;
+            background: var(--mimir-cyan);
+            color: var(--raven-black);
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+        }
+
+        .arch-icon {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--odin-silver);
+        }
+
+        .arch-card-highlight .arch-icon {
+            color: var(--mimir-cyan);
+        }
+
+        .arch-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--mimir-cyan);
+            margin-bottom: 8px;
+        }
+
+        .arch-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .arch-desc {
+            font-size: 14px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        /* Commercial Section */
+        .commercial-section {
+            background: linear-gradient(180deg, var(--raven-black) 0%, var(--chagall) 100%);
+            padding: 120px 40px;
+        }
+
+        .commercial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1100px;
+            margin: 64px auto 0;
+        }
+
+        .commercial-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 300ms ease;
+        }
+
+        .commercial-card:hover {
+            border-color: var(--valhalla-gold);
+            transform: translateY(-4px);
+        }
+
+        .commercial-icon {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .commercial-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--valhalla-gold);
+            margin-bottom: 16px;
+        }
+
+        .commercial-desc {
+            font-size: 15px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .comparison-table {
+            max-width: 900px;
+            margin: 64px auto 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 16px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .comparison-table th:first-child {
+            color: var(--odin-silver);
+        }
+
+        .comparison-table th:nth-child(2) {
+            color: var(--odin-silver);
+        }
+
+        .comparison-table td {
+            padding: 20px 24px;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 500;
+            color: white;
+        }
+
+        .comparison-table .bad {
+            color: var(--fragment-red);
+        }
+
+        .comparison-table .good {
+            color: var(--yggdrasil-green);
+        }
+
+        .comparison-table .neutral {
+            color: var(--odin-silver);
+        }
+
+        .approach-highlight {
+            background: rgba(0, 172, 193, 0.1);
+        }
+
+        .approach-highlight td:first-child {
+            color: var(--mimir-cyan);
+        }
+
+        /* Compliance Section */
+        .compliance-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .compliance-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            transition: all 300ms ease;
+        }
+
+        .compliance-item:hover {
+            border-color: var(--yggdrasil-green);
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        .compliance-check {
+            color: var(--yggdrasil-green);
+            font-size: 16px;
+        }
+
+        .compliance-text {
+            color: var(--odin-silver);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+        }
+
+        /* Readiness Section */
+        .readiness-section {
+            background: linear-gradient(180deg, var(--chagall) 0%, var(--raven-black) 100%);
+            padding: 120px 40px;
+        }
+
+        .readiness-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .readiness-status {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 40px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: var(--yggdrasil-green);
+            color: var(--raven-black);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            margin-bottom: 24px;
+        }
+
+        .status-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .status-desc {
+            font-size: 15px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        .funds-list {
+            list-style: none;
+        }
+
+        .funds-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: var(--odin-silver);
+        }
+
+        .funds-list .num {
+            font-family: 'Space Mono', monospace;
+            color: var(--mimir-cyan);
+            font-weight: 700;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .big-quote {
+            font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 300;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .big-quote strong {
+            color: var(--valhalla-gold);
+            font-weight: 600;
+        }
+
+        /* Diligence Section */
+        .diligence-section {
+            background: var(--raven-black);
+            padding: 80px 40px;
+        }
+
+        .diligence-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+        }
+
+        .diligence-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--odin-silver);
+            margin-bottom: 16px;
+        }
+
+        .diligence-text {
+            font-size: 15px;
+            color: var(--odin-silver);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--raven-black);
+            padding: 48px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .arch-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .commercial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .readiness-content {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <div class="brain-icon">
-                <!-- SVG unchanged -->
-                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2" fill="none"/>
-                    <path d="M32 8 Q48 20 48 32 Q48 44 32 56 Q16 44 16 32 Q16 20 32 8" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
-                    <circle cx="32" cy="32" r="8" fill="currentColor" opacity="0.3"/>
-                    <circle cx="32" cy="32" r="3" fill="var(--mimir-cyan)"/>
-                    <path d="M32 8 L32 20" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
-                    <path d="M32 44 L32 56" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
-                    <path d="M8 32 L20 32" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
-                    <path d="M44 32 L56 32" stroke="var(--mimir-cyan)" stroke-width="1.5"/>
-                </svg>
+            <div class="hero-text">
+                <div class="eyebrow">INVESTERINGSÖVERSIKT</div>
+                <h1>Quantum<span>Bridge</span></h1>
+                <p class="tagline">"OpenRouter för reglerad data"</p>
+                <p class="description">Efterlevnadsmellanvara som sitter mellan företag och AI-leverantörer. Ett säkert översättnings- och skyddslager som låter reglerade företag använda klassledande AI-modeller – säkert, granskningsbart och utan compliance-mardrömmar.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-cyan">Boka Demo</a>
+                    <a href="#" class="btn btn-ghost">Teknisk Dokumentation →</a>
+                </div>
             </div>
-
-            <div class="hero-eyebrow">Säker AI-infrastruktur för vårdgivare</div>
-
-            <h1 class="hero-title">
-                Använd AI. Behåll patienten.<br>
-                <strong>PHI lämnar aldrig dina väggar.</strong>
-            </h1>
-
-            <p class="hero-subtitle">
-                QuantumBridge gör det möjligt att använda avancerad AI utan att någon skyddad hälsoinformation någonsin lämnar ditt system. 
-                Dina nycklar. Din infrastruktur. Ditt fulla skydd.
-            </p>
-
-            <div class="hero-stats">
-                <div class="hero-stat green">
-                    <span class="number">0</span>
-                    PHI-incidenter
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">qbridge — dataflöde</span>
                 </div>
-                <div class="hero-stat cyan">
-                    <span class="number">60%</span>
-                    snabbare dokumentation
-                </div>
-                <div class="hero-stat gold">
-                    <span class="number">&lt;50ms</span>
-                    tilläggslatens
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ </span>
+                        <span class="terminal-command">qbridge status</span>
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        <br>
+                        &nbsp;&nbsp;◈&nbsp;&nbsp;&nbsp;QUANTUMBRIDGE // Compliance Gateway<br>
+                        &nbsp;━┳━&nbsp;&nbsp;════════════════════════════════<br>
+                        &nbsp;&nbsp;┃&nbsp;&nbsp;&nbsp;Åtkomstlager för Enterprise AI v1.0<br>
+                        &nbsp;╱&nbsp;╲<br>
+                        <br>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Ingress: </span><span class="terminal-accent">patientanteckningar.hl7</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Avidentifiering: </span><span class="terminal-accent">Personuppgifter borttagna</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Policykontroll: </span><span class="terminal-accent">HIPAA/GDPR-kompatibel</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Dirigerad till: </span><span class="terminal-accent">Claude-3.5-Sonnet</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Återidentifiering: </span><span class="terminal-accent">endast tillåtna fält</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Revisionslogg: </span><span class="terminal-accent">txn_8f3a2b1c</span>
+                    </div>
+                    <div class="terminal-line"><br></div>
+                    <div class="terminal-line terminal-output">
+                        AI-leverantör såg: <span class="terminal-error">0 personuppgifter</span>
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        Företaget fick: <span class="terminal-success">komplett AI-svar</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Problem -->
-    <section class="section section-dark">
-        <div class="section-label">Problemet</div>
-        <h2 class="section-title">AI innebär risk — om patientdata lämnar systemet.</h2>
-        <p class="section-text">
-            Vårdgivare behöver AI, men de flesta modeller kräver att data skickas till externa leverantörer. 
-            Det är juridiskt och säkerhetsmässigt oacceptabelt. QuantumBridge löser ekvationen.
-        </p>
-
-        <div class="problem-grid">
-            <div class="problem-card">
-                <div class="problem-icon">◼</div>
-                <h3 class="problem-title">PHI lämnar infrastrukturen</h3>
-                <p class="problem-text">
-                    Traditionella AI-flöden innebär överföring av PHI till tredje part. 
-                    Detta bryter mot säkerhetspolicyer, skapar juridisk risk och stoppar AI-adoptionen.
-                </p>
-            </div>
-
-            <div class="problem-card">
-                <div class="problem-icon">∞</div>
-                <h3 class="problem-title">Ingen kontroll över modellen</h3>
-                <p class="problem-text">
-                    AI-leverantörer kör modeller på sina egna servrar. Vårdgivaren saknar insyn i loggar, åtkomst och lagring — 
-                    en blockerande faktor för all känslig data.
-                </p>
-            </div>
-
-            <div class="problem-card">
-                <div class="problem-icon">⊘</div>
-                <h3 class="problem-title">Regulatoriska hinder</h3>
-                <p class="problem-text">
-                    HIPAA, SOC 2 och interna säkerhetskrav gör externa dataflöden omöjliga. 
-                    Utan ett compliance-lager stannar all avancerad AI vid dörren.
-                </p>
+    <section class="problem-section">
+        <div class="problem-content">
+            <div class="section-label">PROBLEMET</div>
+            <h2>En enorm marknad utestängd från AI-revolutionen</h2>
+            <p>Hårt reglerade branscher – sjukvårdssystem, banker, försäkringsbolag, rymdindustri – sitter på enormt värdefull data. De vet att AI skulle kunna förvandla deras verksamhet: automatisera klinisk dokumentation, upptäcka bedrägerier, accelerera forskning.</p>
+            <p>Men de sitter fast. Att skicka patientjournaler eller finansiell data till OpenAI eller Anthropics moln skapar compliance-mardrömmar. HIPAA-överträdelser kan kosta miljoner. GDPR-brott utlöser böter baserade på procent av omsättningen.</p>
+            <p>Så dessa organisationer undviker antingen AI helt eller bygger dyra, underlägsna interna lösningar.</p>
+            <div class="highlight-box">
+                <p>Resultatet: företagens AI-budgetar frysta av oro för efterlevnad.</p>
             </div>
         </div>
     </section>
 
-    <!-- The Architecture -->
-    <section class="section section-navy">
-        <div class="section-label">Lösningen</div>
-        <h2 class="section-title">QuantumBridge: AI utan att PHI lämnar ditt system.</h2>
-        <p class="section-text">
-            Plattformen avidentifierar, routar och återidentifierar data — helt inom din VPC. 
-            AI-leverantörer får endast tokens, aldrig PHI. Ingen trafik går över publikt internet.
-        </p>
-
-        <div class="architecture-visual">
-            <div class="tier-grid">
-                <div class="tier-box">
-                    <div class="tier-id">T1–T2</div>
-                    <div class="tier-name">PERCEPTION</div>
-                    <div class="tier-desc">PHI in i systemet</div>
-                </div>
-                <div class="tier-box">
-                    <div class="tier-id">T3</div>
-                    <div class="tier-name">MEMORY</div>
-                    <div class="tier-desc">Din infrastruktur</div>
-                </div>
-                <div class="tier-box highlight">
-                    <div class="tier-id">T4</div>
-                    <div class="tier-name">QUANTUMBRIDGE</div>
-                    <div class="tier-desc">Avidentifiera → Route → Återidentifiera</div>
-                </div>
-                <div class="tier-box">
-                    <div class="tier-id">T4.5</div>
-                    <div class="tier-name">SÄKERHET</div>
-                    <div class="tier-desc">Dina nycklar. Ditt HSM.</div>
-                </div>
-                <div class="tier-box">
-                    <div class="tier-id">T5</div>
-                    <div class="tier-name">AI-MOTOR</div>
-                    <div class="tier-desc">Claude / GPT-4 / Bedrock</div>
-                </div>
+    <section class="flow-section">
+        <div class="section-header">
+            <div class="section-label">TEKNISK ARKITEKTUR</div>
+            <h2 class="section-title">En Compliance-gateway</h2>
+            <p class="section-subtitle">Data lämnar aldrig kundens miljö. QuantumBridge installeras i deras eget moln (AWS, Azure, GCP).</p>
+        </div>
+        
+        <div class="flow-diagram">
+            <div class="flow-terminal">
+                <div class="flow-line"><span class="layer-label">Företagssystem</span> <span class="arrow">→</span> <span class="highlight">Ingress-adaptrar</span> <span class="arrow">→</span> <span class="highlight">Avidentifiering</span> <span class="arrow">→</span> <span class="highlight">Policy-router</span> <span class="arrow">→</span> <span class="layer-label">LLM-leverantör</span></div>
+                <div class="flow-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span></div>
+                <div class="flow-line"><span class="layer-label">Företagssystem</span> <span class="arrow">←</span> <span class="highlight">Återidentifiering</span> <span class="arrow">←</span> <span class="highlight">Svarshantering</span> <span class="arrow">←</span> <span class="highlight">AI-svar</span> <span class="arrow">←────────┘</span></div>
+                <div class="flow-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span></div>
+                <div class="flow-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="layer-label">Revisionslager</span></div>
             </div>
-
-            <p class="architecture-explanation">
-                <strong>Det känsliga lämnar aldrig din miljö.</strong>  
-                Externa AI-modeller får endast tokens. Ingen PHI överförs. All åtkomst, loggning och kryptering kontrolleras av dig.
-            </p>
         </div>
     </section>
 
-    <!-- Proof -->
-    <section class="section section-dark">
-        <div class="section-label">Bevisen</div>
-        <h2 class="section-title">Fältresultat från sjukhus och vårdgivare.</h2>
-        <p class="section-text">QuantumBridge har redan demonstrerat kraftigt förbättrad effektivitet — utan att kompromissa med datasäkerhet.</p>
-
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-value">0</div>
-                <div class="stat-label">PHI-incidenter</div>
-                <div class="stat-sublabel">Ingen data lämnar någonsin miljön</div>
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">HUR DET FUNGERAR</div>
+            <h2 class="section-title">Fem steg. Fullständigt skydd.</h2>
+        </div>
+        
+        <div class="arch-grid">
+            <div class="arch-card">
+                <div class="arch-icon">01</div>
+                <div class="arch-name">INGRESS</div>
+                <div class="arch-title">Dataintag</div>
+                <div class="arch-desc">Data kommer in från företaget – patientanteckningar, finansiella poster, skadeanmälningar. Vård-specifika kopplingar (HL7/FHIR) minskar integrationsfriktionen.</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-value">60%</div>
-                <div class="stat-label">Snabbare dokumentation</div>
-                <div class="stat-sublabel">AI-stödda kliniska anteckningar</div>
+            <div class="arch-card arch-card-highlight">
+                <div class="arch-icon">02</div>
+                <div class="arch-name">AVIDENTIFIERA</div>
+                <div class="arch-title">Rensa känslig data</div>
+                <div class="arch-desc">QuantumBridge rensar bort namn, personnummer, journalnummer och all skyddad information med hjälp av avancerad avidentifiering.</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-value">12K</div>
-                <div class="stat-label">Återvunna timmar</div>
-                <div class="stat-sublabel">Årligen i ett 400-bäddars sjukhus</div>
+            <div class="arch-card">
+                <div class="arch-icon">03</div>
+                <div class="arch-name">DIRIGERA</div>
+                <div class="arch-title">Policystyrd routing</div>
+                <div class="arch-desc">Sanerad data går till AI-modellen. Policymotorn upprätthåller regler om vilken data som får gå vart, och vilka modeller som används för vilka syften.</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-value">&lt;50ms</div>
-                <div class="stat-label">Tilläggslatens</div>
-                <div class="stat-sublabel">Obegriplig för användaren</div>
+            <div class="arch-card">
+                <div class="arch-icon">04</div>
+                <div class="arch-name">BEARBETA</div>
+                <div class="arch-title">AI-svar</div>
+                <div class="arch-desc">Svaret kommer tillbaka från OpenAI, Anthropic eller andra leverantörer. QuantumBridge återinför identifierande information endast där det är tillåtet.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">05</div>
+                <div class="arch-name">REVISION</div>
+                <div class="arch-title">Oföränderlig loggning</div>
+                <div class="arch-desc">Allt loggas för revisionsspår, med lagringspolicyer som matchar lagkrav. Tillfredsställer tillsynsmyndigheter och compliance-team.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">∞</div>
+                <div class="arch-name">RESULTAT</div>
+                <div class="arch-title">Compliance-lugn</div>
+                <div class="arch-desc">Företaget får AI-kapacitet. AI-leverantören ser aldrig skyddad data. Compliance-teamen kan sova gott om natten.</div>
             </div>
         </div>
+    </section>
 
+    <section class="commercial-section">
+        <div class="section-header">
+            <div class="section-label">VARFÖR DETTA ÄR VIKTIGT</div>
+            <h2 class="section-title">Kommersiell positionering</h2>
+        </div>
+        
+        <div class="commercial-grid">
+            <div class="commercial-card">
+                <div class="commercial-icon">◈</div>
+                <div class="commercial-title">MARKNADSPOSITION</div>
+                <div class="commercial-desc">OpenRouter aggregerar åtkomst till AI-modeller för utvecklare. QuantumBridge gör detsamma, men löser compliance-problemet som håller företagsbudgetar låsta.</div>
+            </div>
+            <div class="commercial-card">
+                <div class="commercial-icon">$</div>
+                <div class="commercial-title">INTÄKTSMODELL</div>
+                <div class="commercial-desc">Prenumerationsavgifter plus användningsbaserad prissättning. Förutsägbara basintäkter med uppsida när kunder skalar sin AI-användning i organisationen.</div>
+            </div>
+            <div class="commercial-card">
+                <div class="commercial-icon">⟷</div>
+                <div class="commercial-title">LEVERANTÖRSNEUTRAL</div>
+                <div class="commercial-desc">Fungerar med flera LLM-leverantörer. Företag vill inte satsa på en enda AI-leverantör – QuantumBridge drar nytta oavsett vilken modell som vinner.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="section-header">
+            <div class="section-label">KONKURRENSLANDSKAP</div>
+            <h2 class="section-title">Kalkylen: Bygga eget vs. Köpa</h2>
+        </div>
+        
         <table class="comparison-table">
-            <thead>
-                <tr>
-                    <th>Mått</th>
-                    <th>Traditionell AI</th>
-                    <th>QuantumBridge</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>PHI-exponering</td>
-                    <td class="traditional">Ja</td>
-                    <td class="cnsa">Aldrig</td>
-                </tr>
-                <tr>
-                    <td>Efterlevnad</td>
-                    <td class="traditional">Ofullständig</td>
-                    <td class="cnsa">HIPAA / SOC 2 / BAA</td>
-                </tr>
-                <tr>
-                    <td>Kontroll</td>
-                    <td class="traditional">AI-leverantör äger nycklarna</td>
-                    <td class="cnsa">BYOK + HSM</td>
-                </tr>
-                <tr>
-                    <td>Nätverk</td>
-                    <td class="traditional">Publikt internet</td>
-                    <td class="cnsa">PrivateLink-endast</td>
-                </tr>
-                <tr>
-                    <td>PHI-incidenter</td>
-                    <td class="traditional">Risk föreligger</td>
-                    <td class="cnsa">0 någonsin</td>
-                </tr>
-            </tbody>
+            <tr>
+                <th>Tillvägagångssätt</th>
+                <th>Begränsning</th>
+            </tr>
+            <tr>
+                <td>Använd inte AI</td>
+                <td class="bad">Konkurrensnackdel; anställda använder "Shadow AI" ändå</td>
+            </tr>
+            <tr>
+                <td>Bygg internt</td>
+                <td class="bad">12-18 månaders projekt, kostnad på $2M+, löpande underhållsbörda</td>
+            </tr>
+            <tr>
+                <td>Använd AI direkt</td>
+                <td class="bad">Regelbrott, misslyckade revisioner, ryktesrisk</td>
+            </tr>
+            <tr class="approach-highlight">
+                <td>QuantumBridge</td>
+                <td class="good">Produktionsredo, compliant, leverantörsneutral, snabbt värdeskapande</td>
+            </tr>
         </table>
     </section>
 
-    <!-- Platform -->
-    <section class="platform-section">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div class="section-label">Plattformen</div>
-            <h2 class="section-title">Compliance-lagret som gör AI möjlig i vården.</h2>
-            <p class="section-text">
-                QuantumBridge placerar ett säkerhetslager mellan vårdinfrastrukturen och modellerna. 
-                Resultatet: full spårbarhet, total kontroll och inga dataläckor.
-            </p>
-
-            <div class="platform-grid">
-                <div class="platform-column core">
-                    <div class="platform-title">Kärnfunktioner</div>
-                    <ul class="feature-list">
-                        <li>Avidentifiering i realtid</li>
-                        <li>Routning endast med tokens</li>
-                        <li>Återidentifiering lokalt</li>
-                        <li>PrivateLink-endpoints</li>
-                        <li>Full loggning & audit trail</li>
-                        <li>BYOK – dina nycklar, ditt HSM</li>
-                    </ul>
-                </div>
-
-                <div class="platform-column packs">
-                    <div class="platform-title">Kompatibelt med alla LLM</div>
-                    <ul class="feature-list">
-                        <li>Claude</li>
-                        <li>GPT-4</li>
-                        <li>Amazon Bedrock</li>
-                        <li>Egenhostade modeller</li>
-                        <li>Anpassade integrationer</li>
-                        <li>BAA-klara implementationer</li>
-                    </ul>
-                </div>
+    <section class="compliance-section">
+        <div class="section-header">
+            <div class="section-label">EFTERLEVNADSMERITER</div>
+            <h2 class="section-title">Byggt för HIPAA & GDPR</h2>
+        </div>
+        
+        <div class="compliance-grid">
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Konfigurerbar datalagring (7 år amerikansk sjukvård, ~2 år EU)</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Human-in-the-loop-arbetsflöden – AI rekommenderar, människan beslutar</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Redo för personuppgiftsbiträdesavtal (PUB/BAA)</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Stöd för konsekvensbedömningar avseende dataskydd (DPIA)</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Fullständigt kundägande av data – bearbeta, lagra aldrig</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Oföränderliga revisionsloggar för regulatorisk inspektion</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Installeras i kundens egen molnmiljö</span>
+            </div>
+            <div class="compliance-item">
+                <span class="compliance-check">✓</span>
+                <span class="compliance-text">Vård-specifika HL7/FHIR-kopplingar</span>
             </div>
         </div>
     </section>
 
-    <!-- Enhancements -->
-    <section class="section section-dark">
-        <div class="section-label">Efterlevnad</div>
-        <h2 class="section-title">Byggt för regulatoriska krav.</h2>
-        <p class="section-text">
-            QuantumBridge uppfyller — eller överträffar — alla krav för säker AI-användning i vården.
-        </p>
-
-        <div class="enhancements-grid">
-            <div class="enhancement-card">
-                <div class="enhancement-number">01</div>
-                <div class="enhancement-title">HIPAA</div>
-                <p class="enhancement-text">Full alignment med Security Rule. Ingen PHI lämnar miljön.</p>
+    <section class="readiness-section">
+        <div class="readiness-content">
+            <div class="readiness-status">
+                <div class="status-badge">REDO FÖR LANSERING</div>
+                <div class="status-title">Kommersialiseringsfas</div>
+                <div class="status-desc">Kärnteknologin existerar. Detta är en investering i kommersialisering, inte en FoU-risk. Produkten beskrivs som redo för lansering.</div>
             </div>
-
-            <div class="enhancement-card">
-                <div class="enhancement-number">02</div>
-                <div class="enhancement-title">SOC 2 Type II</div>
-                <p class="enhancement-text">Kontrollerad, granskningsbar och certifierad säkerhetsprocess.</p>
-            </div>
-
-            <div class="enhancement-card">
-                <div class="enhancement-number">03</div>
-                <div class="enhancement-title">BAA-redo</div>
-                <p class="enhancement-text">Implementeras på dagar, inte månader — helt i linje med avtalskrav.</p>
+            
+            <div class="funds-use">
+                <ul class="funds-list">
+                    <li>
+                        <span class="num">01</span>
+                        <span>Slutförande av beräkningsinfrastruktur och hosting</span>
+                    </li>
+                    <li>
+                        <span class="num">02</span>
+                        <span>Härdning av juridisk och compliance-dokumentation</span>
+                    </li>
+                    <li>
+                        <span class="num">03</span>
+                        <span>Teamexpansion för försäljning och customer success</span>
+                    </li>
+                    <li>
+                        <span class="num">04</span>
+                        <span>Paketering av prissättning, SLA:er och go-to-market-material</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta-section">
-        <h2 class="cta-title">AI till vårdgivare.<br><strong>Utan risk.</strong></h2>
-        <p class="cta-subtitle">
-            Dina kliniker får AI-stöd. Din CISO får full kontroll.  
-            QuantumBridge gör avancerad AI möjlig utan att PHI någonsin lämnar din miljö.
-        </p>
-        <div class="cta-buttons">
-            <a href="#" class="btn btn-primary">Boka arkitekturgenomgång</a>
-            <a href="#" class="btn btn-secondary">Läs whitepaper</a>
+    <section class="quote-section">
+        <p class="big-quote">QuantumBridge låser upp företagens AI-budgetar som för närvarande är frysta av compliance-oro, och <strong>fångar marginalen som portvakten för reglerad industri till de främsta AI-modellerna.</strong></p>
+    </section>
+
+    <section class="diligence-section">
+        <div class="diligence-content">
+            <div class="diligence-label">FRÅGOR FÖR DUE DILIGENCE</div>
+            <p class="diligence-text">Kund-LOI:er eller pågående piloter · Konkurrensfördelar bortom "first-mover" · Planerade nyckelrekryteringar · Specifika partnerskap för go-to-market med systemintegratörer eller AI-leverantörer</p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
-        <p class="footer-text">QUANTUMBRIDGE · SÄKER AI-INFRASTRUKTUR · VERSION FÖR VÅRDSEKTORN · 2025</p>
+        <p class="footer-text">QUANTUMBRIDGE · EFTERLEVNADSMELLANVARA FÖR AI · INVESTERINGSÖVERSIKT · 2025</p>
     </footer>
 </body>
 </html>
