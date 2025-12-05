@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In Quantum | Unified Portal</title>
+    <title>In Quantum | Portal</title>
     
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -33,7 +33,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           LOGIN OVERLAY (Unchanged)
+           LOGIN OVERLAY (Unchanged structure, updated for Swedish)
            ═══════════════════════════════════════════════════════════════ */
         #login-overlay {
             position: fixed;
@@ -283,9 +283,9 @@
     <div id="login-overlay">
         <div class="login-container">
             <div class="login-logo">In Quantum</div>
-            <input type="password" id="access-code" class="login-input" placeholder="ENTER ACCESS CODE">
-            <button id="btn-authenticate" class="login-btn">Authenticate</button>
-            <div class="error-msg" id="login-error">ACCESS DENIED</div>
+            <input type="password" id="access-code" class="login-input" placeholder="ANGE ÅTKOMSTKOD">
+            <button id="btn-authenticate" class="login-btn">Autentisera</button>
+            <div class="error-msg" id="login-error">ÅTKOMST NEKAD</div>
         </div>
     </div>
 
@@ -301,35 +301,34 @@
 
         <div class="nav-links-container">
             <div class="nav-group">
-                <div class="nav-label">Initiatives</div>
-                <button class="nav-btn active" data-page="odin_initiative_brand.html">The Odin Initiative</button>
+                <div class="nav-label">Initiativ</div>
+                <button class="nav-btn active" data-page="odin_initiative_brand.html">Odin-initiativet</button>
                 <button class="nav-btn" data-page="munin_417_product.html">MUNIN-417</button>
                 <button class="nav-btn" data-page="cnsa-se.html">CNSA</button>
             </div>
 
             <div class="nav-group">
                 <div class="nav-label">IQOS</div>
-                <button class="nav-btn" data-page="iqos-premium.html">Premium</button>
-                <button class="nav-btn" data-page="iqos-lite.html">Lite</button>
+                <button class="nav-btn" data-page="iqos-lite.html">IQOS</button>
             </div>
 
             <div class="nav-group">
                 <div class="nav-label">QuantumBridge</div>
                 <button class="nav-btn" data-page="quantumbridge.html">QuantumBridge</button>
-                <button class="nav-btn" data-page="quantumbridge-careflyer.html">Healthcare</button>
-                <button class="nav-btn" data-page="quantumbridge-legal.html">Legal</button>
-                <button class="nav-btn" data-page="quantumbridge-aerospace.html">Aerospace</button>
+                <button class="nav-btn" data-page="quantumbridge-careflyer.html">Sjukvård</button>
+                <button class="nav-btn" data-page="quantumbridge-legal.html">Juridik</button>
+                <button class="nav-btn" data-page="quantumbridge-aerospace.html">Flyg & Rymd</button>
             </div>
 
             <div class="nav-group">
-                <div class="nav-label">Resources</div>
-                <button class="nav-btn" data-page="marketing_campaigns.html">Campaigns</button>
+                <div class="nav-label">Resurser</div>
+                <button class="nav-btn" data-page="marketing_campaigns.html">Kampanjer</button>
             </div>
         </div>
     </nav>
 
     <main id="content-area">
-        <div id="loader">LOADING...</div>
+        <div id="loader">LADDAR...</div>
         <div id="dynamic-content">
             </div>
     </main>
@@ -388,7 +387,7 @@
             $('#dynamic-content').load(url, function(response, status, xhr) {
                 $('#loader').hide();
                 if (status == "error") {
-                    $('#dynamic-content').html('<div style="color:white; padding:40px; text-align:center;">Error Loading Page</div>').show();
+                    $('#dynamic-content').html('<div style="color:white; padding:40px; text-align:center;">Fel vid laddning av sida</div>').show();
                 } else {
                     $('#dynamic-content').show();
                     $('#content-area').scrollTop(0);
