@@ -11,13 +11,14 @@
 
     <style>
         /* ═══════════════════════════════════════════════════════════════
-           PORTAL SHELL (Sidebar & Mobile Nav)
+           CORE VARIABLES & RESET
            ═══════════════════════════════════════════════════════════════ */
         :root {
-            --nav-width: 260px;
+            --header-height: 70px;
             --portal-bg: #050505;
-            --portal-border: rgba(255,255,255,0.1);
+            --portal-border: rgba(255,255,255,0.15);
             --accent: #E8C547;
+            --nav-bg: #080808;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,186 +26,130 @@
         body {
             background: var(--portal-bg);
             font-family: 'DM Sans', sans-serif;
-            display: flex;
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* We handle scrolling in content-area */
+            display: flex;
+            flex-direction: column; /* Stack header on top of content */
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           LOGIN OVERLAY (New Section)
+           LOGIN OVERLAY (Unchanged)
            ═══════════════════════════════════════════════════════════════ */
         #login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: #050505;
-            z-index: 10000; /* Highest layer */
+            z-index: 10000;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
         }
 
-        .login-container {
+        .login-container { width: 100%; max-width: 320px; text-align: center; padding: 20px; }
+        .login-logo { font-family: 'Space Mono', monospace; color: white; font-size: 16px; letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; }
+        .login-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--portal-border); color: white; padding: 15px; font-family: 'Space Mono', monospace; font-size: 14px; text-align: center; margin-bottom: 20px; outline: none; transition: 0.3s; }
+        .login-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.08); }
+        .login-btn { background: white; color: black; border: none; padding: 12px 30px; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .login-btn:hover { background: var(--accent); }
+        .error-msg { color: #ff4444; font-family: 'Space Mono', monospace; font-size: 10px; margin-top: 15px; height: 15px; opacity: 0; transition: opacity 0.3s; }
+
+        /* ═══════════════════════════════════════════════════════════════
+           TOP NAVIGATION (DESKTOP DEFAULT)
+           ═══════════════════════════════════════════════════════════════ */
+        .portal-nav {
+            height: var(--header-height);
             width: 100%;
-            max-width: 320px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .login-logo {
-            font-family: 'Space Mono', monospace;
-            color: white;
-            font-size: 16px;
-            letter-spacing: 4px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-
-        .login-input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--portal-border);
-            color: white;
-            padding: 15px;
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 20px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .login-input:focus {
-            border-color: var(--accent);
-            background: rgba(255,255,255,0.08);
-        }
-
-        .login-btn {
-            background: white;
-            color: black;
-            border: none;
-            padding: 12px 30px;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 12px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .login-btn:hover {
-            background: var(--accent);
-        }
-
-        .error-msg {
-            color: #ff4444;
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            margin-top: 15px;
-            height: 15px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        /* --- MOBILE HEADER --- */
-        .mobile-header {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 60px;
-            background: #080808;
+            background: var(--nav-bg);
             border-bottom: 1px solid var(--portal-border);
-            z-index: 5000;
+            display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-        }
-
-        .mobile-logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            color: white;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hamburger-btn {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        /* --- SIDEBAR --- */
-        .portal-nav {
-            width: var(--nav-width);
-            background: #080808;
-            border-right: 1px solid var(--portal-border);
-            display: flex;
-            flex-direction: column;
-            padding: 32px 0;
-            flex-shrink: 0;
+            padding: 0 40px;
             z-index: 4000;
-            overflow-y: auto;
-            transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
-        .portal-logo-desktop {
-            padding: 0 32px;
-            margin-bottom: 48px;
+        /* The Logo in the Nav */
+        .portal-logo {
             color: white;
             font-family: 'Space Mono', monospace;
-            font-size: 14px;
+            font-size: 16px;
             letter-spacing: 2px;
             text-transform: uppercase;
+            font-weight: 700;
+            margin-right: 40px;
         }
 
-        .nav-group { margin-bottom: 32px; }
+        /* Container for links to keep them on the right */
+        .nav-links-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 10px;
+        }
 
+        /* Groups in Desktop Mode (Just wrappers) */
+        .nav-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+        }
+
+        /* Hide the Group Labels (Initiatives/Resources) on Desktop to save space */
         .nav-label {
-            padding: 0 32px;
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            color: #666;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            display: none; 
         }
 
-        .nav-btn {
+        /* Vertical Divider between groups on Desktop */
+        .nav-group::after {
+            content: '';
             display: block;
-            width: 100%;
-            text-align: left;
-            padding: 12px 32px;
+            height: 16px;
+            width: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 15px;
+        }
+        .nav-group:last-child::after { display: none; }
+
+        /* Links Styles */
+        .nav-btn {
             background: transparent;
             border: none;
-            color: #999;
+            color: #888;
             font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 16px;
             cursor: pointer;
-            border-left: 2px solid transparent;
+            border-radius: 4px;
             transition: 0.2s;
+            white-space: nowrap;
         }
 
-        .nav-btn:hover { background: rgba(255,255,255,0.03); color: white; }
+        .nav-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+        
         .nav-btn.active {
-            background: rgba(232, 197, 71, 0.05);
             color: var(--accent);
-            border-left-color: var(--accent);
+            background: rgba(232, 197, 71, 0.1);
         }
 
-        /* --- CONTENT AREA --- */
+        /* Hamburger (Hidden on Desktop) */
+        .hamburger-btn { display: none; }
+
+
+        /* ═══════════════════════════════════════════════════════════════
+           CONTENT AREA
+           ═══════════════════════════════════════════════════════════════ */
         #content-area {
             flex-grow: 1;
             position: relative;
             overflow-y: auto;
             scroll-behavior: smooth;
-            background: #000; /* Default background */
+            background: #000;
         }
 
-        /* --- LOADING SPINNER --- */
         #loader {
             display: none;
             position: absolute;
@@ -214,17 +159,123 @@
             font-family: 'Space Mono', monospace;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .mobile-header { display: flex; }
-            .portal-nav {
-                position: fixed; top: 60px; left: 0; bottom: 0; width: 100%;
-                background: #080808; transform: translateX(-100%);
+        /* ═══════════════════════════════════════════════════════════════
+           MOBILE / TABLET BREAKPOINT (< 1024px)
+           ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            
+            /* Show Hamburger in a Mobile Header Bar */
+            .hamburger-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
             }
-            .portal-nav.nav-open { transform: translateX(0); }
-            .portal-logo-desktop { display: none; }
-            #content-area { padding-top: 60px; }
+
+            /* The Nav becomes the Sidebar again */
+            .portal-nav {
+                position: fixed;
+                top: 0; 
+                left: 0;
+                height: 100vh;
+                width: 280px;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 0; /* Reset padding */
+                border-bottom: none;
+                border-right: 1px solid var(--portal-border);
+                transform: translateX(-100%); /* Hide by default */
+                transition: transform 0.3s ease;
+                z-index: 5000;
+            }
+
+            .portal-nav.nav-open {
+                transform: translateX(0); /* Slide in */
+            }
+
+            /* Mobile Header (Pseudo-element to hold the Logo and Ham on mobile) */
+            .mobile-top-bar {
+                display: flex !important;
+                height: 60px;
+                width: 100%;
+                background: #080808;
+                border-bottom: 1px solid var(--portal-border);
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+                position: relative;
+                z-index: 4500;
+                flex-shrink: 0;
+            }
+
+            /* Adjust Logo inside Sidebar */
+            .portal-logo {
+                margin: 30px 0 40px 30px; /* Bring back spacing for sidebar look */
+                display: block;
+            }
+
+            /* Stack Links Vertically */
+            .nav-links-container {
+                flex-direction: column;
+                width: 100%;
+                height: auto;
+                gap: 0;
+            }
+
+            /* Stack Groups Vertically */
+            .nav-group {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            .nav-group::after { display: none; } /* Remove vertical dividers */
+
+            /* Show Labels again on Mobile */
+            .nav-label {
+                display: block;
+                padding: 0 32px;
+                font-family: 'Space Mono', monospace;
+                font-size: 10px;
+                color: #666;
+                margin-bottom: 12px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                width: 100%;
+            }
+
+            /* Link Styles for Mobile Sidebar */
+            .nav-btn {
+                width: 100%;
+                text-align: left;
+                padding: 12px 32px;
+                border-radius: 0;
+                border-left: 2px solid transparent;
+            }
+            
+            .nav-btn.active {
+                background: rgba(232, 197, 71, 0.05);
+                border-left-color: var(--accent);
+            }
         }
+
+        /* Helper to hide mobile header on desktop */
+        .mobile-top-bar { display: none; }
+        
+        /* Overlay when menu opens on mobile */
+        #mobile-backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(2px);
+            z-index: 4900;
+        }
+        #mobile-backdrop.active { display: block; }
+
     </style>
 </head>
 <body>
@@ -238,31 +289,34 @@
         </div>
     </div>
 
-    <header class="mobile-header">
-        <div class="mobile-logo">IN QUANTUM</div>
+    <div class="mobile-top-bar">
+        <div class="portal-logo" style="margin:0;">IN QUANTUM</div>
         <button class="hamburger-btn" onclick="toggleNav()">☰</button>
-    </header>
+    </div>
+
+    <div id="mobile-backdrop" onclick="toggleNav()"></div>
 
     <nav class="portal-nav" id="portalNav">
-        <div class="portal-logo-desktop">IN QUANTUM</div>
+        <div class="portal-logo">IN QUANTUM</div>
 
-        <div class="nav-group">
-            <div class="nav-label">Initiatives</div>
-            <button class="nav-btn active" data-page="odin_initiative_brand.html">The Odin Initiative</button>
-            <button class="nav-btn" data-page="munin_417_product.html">MUNIN-417 Core</button>
-        </div>
+        <div class="nav-links-container">
+            <div class="nav-group">
+                <div class="nav-label">Initiatives</div>
+                <button class="nav-btn active" data-page="odin_initiative_brand.html">The Odin Initiative</button>
+                <button class="nav-btn" data-page="munin_417_product.html">MUNIN-417</button>
+            </div>
 
-        <div class="nav-group">
-            <div class="nav-label">QuantumBridge</div>
-            <button class="nav-btn" data-page="quantumbridge-careflyer.html">Healthcare</button>
-            <button class="nav-btn" data-page="quantumbridge-legal.html">Legal</button>
-            <button class="nav-btn" data-page="quantumbridge-aerospace.html">Aerospace</button>
-        </div>
+            <div class="nav-group">
+                <div class="nav-label">QuantumBridge</div>
+                <button class="nav-btn" data-page="quantumbridge-careflyer.html">Healthcare</button>
+                <button class="nav-btn" data-page="quantumbridge-legal.html">Legal</button>
+                <button class="nav-btn" data-page="quantumbridge-aerospace.html">Aerospace</button>
+            </div>
 
-        <div class="nav-group">
-            <div class="nav-label">Resources</div>
-            <button class="nav-btn" data-page="marketing_campaigns.html">Campaigns</button>
-            <button class="nav-btn" data-page="quantumbridge_onepager-1.html">One Pager</button>
+            <div class="nav-group">
+                <div class="nav-label">Resources</div>
+                <button class="nav-btn" data-page="marketing_campaigns.html">Campaigns</button>
+            </div>
         </div>
     </nav>
 
@@ -274,29 +328,22 @@
 
     <script>
         $(document).ready(function() {
-            // --- AUTHENTICATION LOGIC ---
-            
+            // --- AUTHENTICATION ---
             const SESSION_KEY = 'inquantum_auth_token';
             const REQUIRED_PASS = 'inquantum2025!';
 
-            // Check if already logged in (optional: remove this if you want login on EVERY refresh)
             if (sessionStorage.getItem(SESSION_KEY) === 'valid') {
                 $('#login-overlay').hide();
             }
 
             function attemptLogin() {
                 const inputVal = $('#access-code').val();
-                
                 if (inputVal === REQUIRED_PASS) {
-                    // Success
                     $('#login-overlay').fadeOut(500);
-                    sessionStorage.setItem(SESSION_KEY, 'valid'); // Remembers login for this session
+                    sessionStorage.setItem(SESSION_KEY, 'valid');
                 } else {
-                    // Fail
                     $('#login-error').css('opacity', '1');
-                    $('#access-code').val(''); // Clear input
-                    
-                    // Shake effect logic
+                    $('#access-code').val('');
                     $('.login-input').css('border-color', '#ff4444');
                     setTimeout(() => {
                         $('#login-error').css('opacity', '0');
@@ -305,36 +352,24 @@
                 }
             }
 
-            // Click listener
             $('#btn-authenticate').click(attemptLogin);
+            $('#access-code').keypress(function(e) { if(e.which == 13) attemptLogin(); });
 
-            // Enter key listener
-            $('#access-code').keypress(function(e) {
-                if(e.which == 13) { attemptLogin(); }
-            });
-
-
-            // --- SITE LOGIC ---
-
-            // 1. Load default page (Brand) on startup
+            // --- NAVIGATION ---
             loadPage('odin_initiative_brand.html');
 
-            // 2. Handle Navigation Clicks
             $('.nav-btn').click(function(e) {
                 e.preventDefault();
-                
-                // Get filename from data attribute
                 const page = $(this).attr('data-page');
                 
-                // Update active state
                 $('.nav-btn').removeClass('active');
                 $(this).addClass('active');
 
-                // Load content
                 loadPage(page);
 
-                // Close mobile menu if open
+                // Close mobile menu
                 $('#portalNav').removeClass('nav-open');
+                $('#mobile-backdrop').removeClass('active');
             });
         });
 
@@ -342,27 +377,20 @@
             $('#loader').show();
             $('#dynamic-content').hide();
 
-            // jQuery .load() fetches the file and inserts it
             $('#dynamic-content').load(url, function(response, status, xhr) {
                 $('#loader').hide();
                 if (status == "error") {
-                    $('#dynamic-content').html(
-                        '<div style="color:white; padding:40px; text-align:center;">' + 
-                        '<h1>Error Loading Page</h1>' + 
-                        '<p>Please ensure you are running this on a Local Server (not file://)</p>' +
-                        '<p>Error: ' + xhr.status + " " + xhr.statusText + '</p></div>'
-                    ).show();
+                    $('#dynamic-content').html('<div style="color:white; padding:40px; text-align:center;">Error Loading Page</div>').show();
                 } else {
                     $('#dynamic-content').show();
-                    // Scroll to top
                     $('#content-area').scrollTop(0);
                 }
             });
         }
 
-        // Mobile Menu Toggle
         function toggleNav() {
             $('#portalNav').toggleClass('nav-open');
+            $('#mobile-backdrop').toggleClass('active');
         }
     </script>
 </body>
