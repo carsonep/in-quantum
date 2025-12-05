@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Odin Initiative | In Quantum</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --raven-black: #0A0A0A;
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --odin-silver: #C0C5CE;
+            --cubist-white: #F5F7FA;
+            --fragment-red: #C13832;
+            --valhalla-gold: #E8C547;
+            --mimir-cyan: #00ACC1;
+            --yggdrasil-green: #2ECC71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--raven-black);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 40px;
+            position: relative;
+            background: linear-gradient(180deg, var(--raven-black) 0%, var(--chagall) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(200, 169, 71, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 172, 193, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .raven-icon {
+            font-size: 64px;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.2s forwards;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--valhalla-gold);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.4s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 300;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.6s forwards;
+        }
+
+        .hero-title strong {
+            color: var(--valhalla-gold);
+            font-weight: 600;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--odin-silver);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.8s forwards;
+        }
+
+        .hero-stat {
+            display: inline-block;
+            padding: 16px 32px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .hero-stat .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--fragment-red);
+            display: block;
+        }
+
+        /* Sections */
+        .section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-dark {
+            background: var(--raven-black);
+        }
+
+        .section-navy {
+            background: var(--chagall);
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--fragment-red);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 32px;
+            line-height: 1.2;
+        }
+
+        .section-text {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--odin-silver);
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        /* The Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .problem-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--fragment-red);
+        }
+
+        .problem-icon {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .problem-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .problem-text {
+            font-size: 14px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        /* The Glass Box Section */
+        .glass-box-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 64px;
+            align-items: center;
+        }
+
+        .box-comparison {
+            text-align: center;
+            padding: 48px;
+        }
+
+        .black-box {
+            background: var(--raven-black);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .black-box .box-icon {
+            font-size: 80px;
+            opacity: 0.3;
+        }
+
+        .glass-box {
+            background: linear-gradient(135deg, rgba(0,172,193,0.1) 0%, rgba(232,197,71,0.1) 100%);
+            border: 2px solid var(--mimir-cyan);
+            position: relative;
+        }
+
+        .glass-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0,172,193,0.3) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(0,172,193,0.3) 50%, transparent 51%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+
+        .glass-box .box-icon {
+            font-size: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .box-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 24px;
+        }
+
+        .box-desc {
+            font-size: 14px;
+            color: var(--odin-silver);
+            margin-top: 12px;
+        }
+
+        .black-box .box-label { color: var(--fragment-red); }
+        .glass-box .box-label { color: var(--mimir-cyan); }
+
+        /* Stats Section */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 32px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--valhalla-gold);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--odin-silver);
+            margin-top: 12px;
+        }
+
+        /* MUNIN Section */
+        .munin-section {
+            background: linear-gradient(180deg, var(--chagall) 0%, var(--raven-black) 100%);
+            padding: 120px 40px;
+        }
+
+        .munin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .munin-visual {
+            text-align: center;
+        }
+
+        .munin-logo {
+            font-size: 120px;
+            margin-bottom: 24px;
+        }
+
+        .munin-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: var(--mimir-cyan);
+        }
+
+        .munin-tagline {
+            font-size: 14px;
+            color: var(--odin-silver);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .munin-content .section-title {
+            margin-bottom: 24px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .feature-list li::before {
+            content: '◆';
+            color: var(--valhalla-gold);
+            font-size: 10px;
+            margin-top: 6px;
+        }
+
+        .feature-list strong {
+            color: white;
+        }
+
+        .feature-list span {
+            color: var(--odin-silver);
+        }
+
+        /* Mythology Section */
+        .mythology-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .myth-quote {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 300;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 24px;
+            line-height: 1.5;
+            color: var(--odin-silver);
+        }
+
+        .myth-source {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--valhalla-gold);
+        }
+
+        .myth-explanation {
+            max-width: 600px;
+            margin: 48px auto 0;
+            font-size: 16px;
+            color: var(--odin-silver);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            color: var(--odin-silver);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 300ms ease;
+        }
+
+        .btn-primary {
+            background: var(--valhalla-gold);
+            color: var(--raven-black);
+        }
+
+        .btn-primary:hover {
+            background: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--raven-black);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--raven-black);
+            padding: 48px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--odin-silver);
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glass-box-visual,
+            .munin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section {
+                padding: 80px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="raven-icon">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 12 Q32 4 48 12" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M48 12 L56 32 L48 52" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
+                    <path d="M48 52 Q32 60 16 52" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M16 52 L8 32 L16 12" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <div class="hero-eyebrow">The Odin Initiative</div>
+            <h1 class="hero-title">We didn't build a better model.<br><strong>We built a better mind.</strong></h1>
+            <p class="hero-subtitle">LLMs guess. The Verity Architecture knows. That's a $985 billion difference.</p>
+            <div class="hero-stat">
+                <span class="number">$384B</span>
+                in AI spending blocked by compliance
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem -->
+    <section class="section section-dark">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">The AI revolution has a trust gap.</h2>
+        <p class="section-text">In 2023, enterprises had $384 billion ready to spend on AI. They couldn't. Not because AI wasn't powerful enough—GPT-4 is miraculous—but because it couldn't be trusted in regulated environments.</p>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">+</div>
+                <h3 class="problem-title">Healthcare can't explain</h3>
+                <p class="problem-text">A black-box denial isn't just bad UX—it's a compliance violation. HIPAA requires explainability. LLMs can't provide it.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">$</div>
+                <h3 class="problem-title">Banks can't audit</h3>
+                <p class="problem-text">Regulators require decision trails. When your AI hallucinates, there's no trail to follow—just statistical noise.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">^</div>
+                <h3 class="problem-title">Aerospace can't certify</h3>
+                <p class="problem-text">FAA certification requires deterministic behavior. A model that's "probably right 85% of the time" doesn't fly—literally.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Glass Box -->
+    <section class="section section-navy">
+        <div class="section-label">The Solution</div>
+        <h2 class="section-title">Welcome to the Glass Box.</h2>
+        <p class="section-text">Your auditor asked how the AI made that decision. Your vendor said "it's complicated." We say: "Here's the complete reasoning chain, timestamped and traceable."</p>
+        
+        <div class="glass-box-visual">
+            <div class="box-comparison black-box">
+                <div class="box-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="currentColor">
+                        <rect x="10" y="10" width="60" height="60" fill="#0A0A0A"/>
+                    </svg>
+                </div>
+                <div class="box-label">The Black Box</div>
+                <div class="box-desc">LLMs: Brilliant, but unexplainable.<br>Input → Magic → Output</div>
+            </div>
+            <div class="box-comparison glass-box">
+                <div class="box-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="40,5 75,40 40,75 5,40" fill="rgba(0,172,193,0.2)"/>
+                        <line x1="40" y1="5" x2="40" y2="75" opacity="0.3"/>
+                        <line x1="5" y1="40" x2="75" y2="40" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="box-label">The Glass Box</div>
+                <div class="box-desc">Verity: Every decision visible.<br>P1 → V4 → E5</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Proof -->
+    <section class="section section-dark">
+        <div class="section-label">The Proof</div>
+        <h2 class="section-title">Numbers that matter.</h2>
+        <p class="section-text">We didn't just match LLM performance. We exceeded it—with a fraction of the data and complete explainability.</p>
+        
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">87%</div>
+                <div class="stat-label">Fewer Errors vs GPT-4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">97%</div>
+                <div class="stat-label">Less Training Data</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Explainability</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUNIN-417 -->
+    <section class="munin-section">
+        <div class="munin-grid">
+            <div class="munin-visual">
+                <div class="munin-logo">
+                <svg width="120" height="120" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="64" cy="64" r="50" stroke="#00ACC1" stroke-width="2" fill="none"/>
+                    <circle cx="64" cy="64" r="20" fill="#00ACC1"/>
+                    <path d="M64 14 L64 34" stroke="#00ACC1" stroke-width="2"/>
+                    <path d="M64 94 L64 114" stroke="#00ACC1" stroke-width="2"/>
+                    <path d="M14 64 L34 64" stroke="#00ACC1" stroke-width="2"/>
+                    <path d="M94 64 L114 64" stroke="#00ACC1" stroke-width="2"/>
+                </svg>
+            </div>
+                <div class="munin-name">MUNIN-417</div>
+                <div class="munin-tagline">Powered by the Verity Architecture</div>
+            </div>
+            <div class="munin-content">
+                <div class="section-label">The Engine</div>
+                <h2 class="section-title">Six Layers. One Truth.</h2>
+                <p class="section-text">The Verity Architecture combines neural perception with symbolic reasoning across six cognitive layers—each auditable, each traceable, each explainable.</p>
+                
+                <ul class="feature-list">
+                    <li><strong>Sensory + Semantic</strong> <span>— Neural perception and pattern recognition</span></li>
+                    <li><strong>Salience + Symbolic</strong> <span>— Working memory and neuro-symbolic translation</span></li>
+                    <li><strong>Verity Gate</strong> <span>— Knowledge grounding. Where symbols meet truth.</span></li>
+                    <li><strong>Synthesis</strong> <span>— Executive decision with complete audit trail</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mythology -->
+    <section class="mythology-section">
+        <div class="section-label" style="color: var(--valhalla-gold);">The Verity Architecture</div>
+        <div class="myth-quote" style="font-style: normal; font-size: 18px; color: white; max-width: 900px;">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; text-align: center; margin-top: 48px;">
+                <div style="padding: 24px 12px; background: rgba(255,255,255,0.05); border-top: 2px solid var(--odin-silver);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--odin-silver); margin-bottom: 8px;">P1</div>
+                    <div style="font-size: 12px; font-weight: 500;">SENSORY</div>
+                    <div style="font-size: 10px; color: var(--odin-silver); margin-top: 4px;">Input</div>
+                </div>
+                <div style="padding: 24px 12px; background: rgba(255,255,255,0.05); border-top: 2px solid var(--odin-silver);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--odin-silver); margin-bottom: 8px;">C2</div>
+                    <div style="font-size: 12px; font-weight: 500;">SEMANTIC</div>
+                    <div style="font-size: 10px; color: var(--odin-silver); margin-top: 4px;">Context</div>
+                </div>
+                <div style="padding: 24px 12px; background: rgba(255,255,255,0.05); border-top: 2px solid var(--odin-silver);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--odin-silver); margin-bottom: 8px;">M3</div>
+                    <div style="font-size: 12px; font-weight: 500;">SALIENCE</div>
+                    <div style="font-size: 10px; color: var(--odin-silver); margin-top: 4px;">Memory</div>
+                </div>
+                <div style="padding: 24px 12px; background: rgba(255,255,255,0.05); border-top: 2px solid var(--odin-silver);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--odin-silver); margin-bottom: 8px;">B4</div>
+                    <div style="font-size: 12px; font-weight: 500;">SYMBOLIC</div>
+                    <div style="font-size: 10px; color: var(--odin-silver); margin-top: 4px;">Bridge</div>
+                </div>
+                <div style="padding: 24px 12px; background: rgba(0,172,193,0.2); border-top: 2px solid var(--mimir-cyan);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mimir-cyan); margin-bottom: 8px;">V4</div>
+                    <div style="font-size: 12px; font-weight: 500; color: var(--mimir-cyan);">VERITY</div>
+                    <div style="font-size: 10px; color: var(--mimir-cyan); margin-top: 4px;">Truth</div>
+                </div>
+                <div style="padding: 24px 12px; background: rgba(255,255,255,0.05); border-top: 2px solid var(--odin-silver);">
+                    <div style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--odin-silver); margin-bottom: 8px;">E5</div>
+                    <div style="font-size: 12px; font-weight: 500;">SYNTHESIS</div>
+                    <div style="font-size: 10px; color: var(--odin-silver); margin-top: 4px;">Decision</div>
+                </div>
+            </div>
+        </div>
+        <p class="myth-explanation" style="margin-top: 48px;">The Verity Gate is the breakthrough—where every symbolic inference is validated against domain knowledge before executive synthesis. This is where hallucinations die and audit trails are born.</p>
+    </section>
+
+    <!-- Norse Mythology -->
+    <section class="mythology-section" style="background: var(--chagall);">
+        <div class="myth-quote">"Huginn ok Muninn fljúga hverjan dag jörmungrund yfir..."</div>
+        <div class="myth-source">— Grímnismál, Poetic Edda</div>
+        <p class="myth-explanation">In Norse mythology, Odin's two ravens—Huginn (thought) and Muninn (memory)—fly across the world each day, returning to whisper what they've learned. Odin feared more for Muninn than Huginn. <strong>Memory is more precious than thought.</strong> Our architecture proves this: grounded knowledge beats raw computation.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2 class="cta-title">Everyone's building bigger models.<br>We're building better minds.</h2>
+        <p class="cta-subtitle">The compliance layer for enterprise AI. Healthcare. Aerospace. Financial services. Starting where trust matters most.</p>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">Request Demo</a>
+            <a href="#" class="btn btn-secondary">Read the Whitepaper</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">IN QUANTUM, INC. · THE ODIN INITIATIVE · DECEMBER 2025</p>
+    </footer>
+</body>
+</html>

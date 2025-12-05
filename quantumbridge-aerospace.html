@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumBridge — Aerospace & Defense</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --cubist: #F5F7FA;
+            --fragment-red: #C13832;
+            --liminal: #E8C547;
+            --white: #FFFFFF;
+            --steel: #2A3441;
+            --classified: #1a1a2e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--classified);
+            color: var(--white);
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 1: THE HOOK — CLEARANCE LEVEL
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+            background: 
+                linear-gradient(180deg, var(--classified) 0%, var(--chagall) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255,255,255,0.01) 2px,
+                    rgba(255,255,255,0.01) 4px
+                );
+            pointer-events: none;
+        }
+
+        /* Grid overlay effect */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 100% 60% at 50% 0%, rgba(30, 58, 95, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(193, 56, 50, 0.05) 0%, transparent 30%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        .classification-banner {
+            display: inline-block;
+            padding: 8px 24px;
+            border: 1px solid var(--fragment-red);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--fragment-red);
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .logo-container {
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .logo-mark {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+        }
+
+        .fragment {
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            opacity: 0.6;
+        }
+
+        .fragment-1 { opacity: 1; }
+        .fragment-2 { opacity: 0.25; }
+        .fragment-3 { opacity: 1; }
+        .fragment-4 { opacity: 1; }
+
+        .accent-pixel {
+            fill: var(--fragment-red);
+            opacity: 1;
+        }
+
+        .wordmark {
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        .headline-primary {
+            font-size: clamp(40px, 8vw, 100px);
+            font-weight: 200;
+            letter-spacing: -2px;
+            line-height: 0.95;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .headline-primary span {
+            display: block;
+        }
+
+        .headline-accent {
+            color: var(--fragment-red);
+        }
+
+        .headline-controlled {
+            font-size: 0.5em;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0.3;
+            display: block;
+            margin-top: 16px;
+        }
+
+        .headline-sub {
+            font-size: clamp(16px, 2vw, 22px);
+            font-weight: 300;
+            opacity: 0.5;
+            max-width: 600px;
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.5s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.8s forwards, pulse 2s ease-in-out 1.5s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            opacity: 0.2;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 2: THE PROBLEM — WHAT'S AT STAKE
+           ═══════════════════════════════════════════════════════════════ */
+
+        .problem {
+            padding: 160px 40px;
+            background: var(--white);
+            color: var(--chagall);
+        }
+
+        .problem-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 32px;
+        }
+
+        .problem-statement {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 200;
+            line-height: 1.4;
+            letter-spacing: -0.5px;
+            margin-bottom: 80px;
+        }
+
+        .problem-statement em {
+            font-style: normal;
+            color: var(--fragment-red);
+        }
+
+        .violations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            text-align: left;
+        }
+
+        .violation-card {
+            padding: 40px;
+            background: var(--cubist);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .violation-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .violation-icon {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .violation-title {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .violation-desc {
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+
+        .violation-penalty {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 12px;
+            background: rgba(193, 56, 50, 0.1);
+            color: var(--fragment-red);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 3: THE ARCHITECTURE — DEFENSE-GRADE
+           ═══════════════════════════════════════════════════════════════ */
+
+        .architecture {
+            padding: 160px 40px;
+            background: var(--chagall);
+            color: var(--white);
+            position: relative;
+        }
+
+        .architecture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--fragment-red), transparent);
+        }
+
+        .architecture-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .architecture-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 200;
+            letter-spacing: -1px;
+        }
+
+        .architecture-diagram {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .boundary-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            position: relative;
+        }
+
+        .boundary {
+            padding: 60px 48px;
+            position: relative;
+        }
+
+        .boundary-cleared {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .boundary-uncleared {
+            background: rgba(193, 56, 50, 0.03);
+            border: 1px solid rgba(193, 56, 50, 0.2);
+        }
+
+        .boundary-label {
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--chagall);
+            padding: 4px 16px;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .boundary-cleared .boundary-label {
+            color: var(--liminal);
+            border: 1px solid var(--liminal);
+        }
+
+        .boundary-uncleared .boundary-label {
+            color: var(--fragment-red);
+            border: 1px solid var(--fragment-red);
+        }
+
+        .boundary-title {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .boundary-list {
+            list-style: none;
+        }
+
+        .boundary-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .boundary-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .divider {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--fragment-red);
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .divider-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--fragment-red);
+            color: var(--white);
+            padding: 12px 20px;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: 11;
+        }
+
+        @media (max-width: 800px) {
+            .boundary-container {
+                grid-template-columns: 1fr;
+            }
+            .divider {
+                left: 0;
+                right: 0;
+                top: auto;
+                bottom: 50%;
+                width: 100%;
+                height: 4px;
+            }
+            .divider-label {
+                top: auto;
+                bottom: 50%;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 4: COMPLIANCE MATRIX
+           ═══════════════════════════════════════════════════════════════ */
+
+        .compliance {
+            padding: 160px 40px;
+            background: var(--cubist);
+            color: var(--chagall);
+        }
+
+        .compliance-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .compliance-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 200;
+            letter-spacing: -0.5px;
+        }
+
+        .compliance-matrix {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: rgba(11, 27, 61, 0.1);
+        }
+
+        .compliance-item {
+            background: var(--white);
+            padding: 48px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .compliance-item:hover {
+            background: var(--chagall);
+            color: var(--white);
+        }
+
+        .compliance-acronym {
+            font-size: 28px;
+            font-weight: 200;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .compliance-name {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            margin-bottom: 16px;
+        }
+
+        .compliance-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #2d8a4e;
+        }
+
+        .compliance-item:hover .compliance-status {
+            color: var(--liminal);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: currentColor;
+            border-radius: 50%;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 5: USE CASES — MISSION CRITICAL
+           ═══════════════════════════════════════════════════════════════ */
+
+        .usecases {
+            padding: 160px 40px;
+            background: var(--chagall);
+            color: var(--white);
+        }
+
+        .usecases-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .usecases-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 200;
+            letter-spacing: -0.5px;
+        }
+
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .usecase-card {
+            padding: 48px 40px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .usecase-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .usecase-number {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            opacity: 0.3;
+            margin-bottom: 16px;
+        }
+
+        .usecase-title {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .usecase-desc {
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.5;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .usecase-data {
+            display: flex;
+            gap: 24px;
+        }
+
+        .usecase-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 200;
+            color: var(--liminal);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 6: THE GUARANTEE
+           ═══════════════════════════════════════════════════════════════ */
+
+        .guarantee {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px;
+            background: var(--white);
+            color: var(--chagall);
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 800px;
+        }
+
+        .guarantee-statement {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 200;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 32px;
+        }
+
+        .guarantee-sub {
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.5;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 7: CTA
+           ═══════════════════════════════════════════════════════════════ */
+
+        .cta {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px;
+            background: var(--classified);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--fragment-red), transparent);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-classification {
+            display: inline-block;
+            padding: 6px 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 48px;
+        }
+
+        .cta-headline {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 200;
+            letter-spacing: -1px;
+            margin-bottom: 48px;
+            line-height: 1.2;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .btn {
+            padding: 20px 48px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--fragment-red);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--chagall);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .cta-footer {
+            margin-top: 60px;
+        }
+
+        .cta-logo {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 12px;
+            opacity: 0.4;
+        }
+
+        .cta-tagline {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.2;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════════════ */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+            .hero { padding: 60px 24px; }
+            .problem, .architecture, .compliance, .usecases { padding: 100px 24px; }
+            .boundary { padding: 40px 24px; }
+            .violation-card, .usecase-card { padding: 32px 24px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; text-align: center; }
+        }
+
+        @media print {
+            section { page-break-inside: avoid; min-height: auto; }
+            .scroll-indicator { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 1: THE HOOK
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="classification-banner">For Defense & Aerospace</div>
+            
+            <div class="logo-container">
+                <svg class="logo-mark" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <path class="fragment fragment-1" d="M 32 25 Q 64 8, 96 25" />
+                    <path class="fragment fragment-2" d="M 96 25 L 110 64 L 96 103" />
+                    <path class="fragment fragment-3" d="M 96 103 Q 64 120, 32 103" />
+                    <path class="fragment fragment-4" d="M 32 103 L 18 64 L 32 25" />
+                    <rect class="accent-pixel" x="110" y="24" width="3" height="3" />
+                </svg>
+                <div class="wordmark">QuantumBridge</div>
+            </div>
+            
+            <h1 class="headline-primary">
+                <span>Your data has</span>
+                <span><span class="headline-accent">clearance.</span></span>
+                <span class="headline-controlled">The AI doesn't need it.</span>
+            </h1>
+            
+            <p class="headline-sub">
+                Export-controlled technical data stays inside your boundary.<br>
+                AI capabilities come in. Nothing classified goes out.
+            </p>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 2: THE PROBLEM
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="problem">
+        <div class="problem-content">
+            <div class="section-label">The Risk</div>
+            
+            <p class="problem-statement">
+                One prompt to a commercial AI with ITAR data<br>
+                is a <em>deemed export violation.</em>
+            </p>
+
+            <div class="violations-grid">
+                <div class="violation-card">
+                    <svg class="violation-icon" viewBox="0 0 32 32" fill="none" stroke="#0B1B3D" stroke-width="1.5">
+                        <path d="M16 4L4 28h24L16 4z"/>
+                        <path d="M16 12v8M16 22v2"/>
+                    </svg>
+                    <div class="violation-title">ITAR Violation</div>
+                    <div class="violation-desc">Sending technical data to a foreign person—including cloud servers outside US jurisdiction—triggers 22 CFR 120-130.</div>
+                    <div class="violation-penalty">Up to $1M per violation</div>
+                </div>
+
+                <div class="violation-card">
+                    <svg class="violation-icon" viewBox="0 0 32 32" fill="none" stroke="#0B1B3D" stroke-width="1.5">
+                        <rect x="4" y="8" width="24" height="18" rx="2"/>
+                        <path d="M4 14h24"/>
+                        <circle cx="16" cy="21" r="3"/>
+                    </svg>
+                    <div class="violation-title">EAR Violation</div>
+                    <div class="violation-desc">Dual-use technologies, encryption, and certain software fall under Commerce Department controls with strict re-export rules.</div>
+                    <div class="violation-penalty">Criminal penalties possible</div>
+                </div>
+
+                <div class="violation-card">
+                    <svg class="violation-icon" viewBox="0 0 32 32" fill="none" stroke="#0B1B3D" stroke-width="1.5">
+                        <path d="M16 4v6M16 22v6M4 16h6M22 16h6"/>
+                        <circle cx="16" cy="16" r="8"/>
+                    </svg>
+                    <div class="violation-title">CMMC Failure</div>
+                    <div class="violation-desc">Using unauthorized cloud services for CUI jeopardizes your CMMC certification and contract eligibility.</div>
+                    <div class="violation-penalty">Contract debarment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 3: THE ARCHITECTURE
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="architecture">
+        <div class="architecture-header">
+            <div class="section-label">The Solution</div>
+            <h2 class="architecture-title">The export boundary is absolute.</h2>
+        </div>
+
+        <div class="architecture-diagram">
+            <div class="boundary-container">
+                <div class="boundary boundary-cleared">
+                    <div class="boundary-label">Cleared Environment</div>
+                    <div class="boundary-title">Inside Your Boundary</div>
+                    <ul class="boundary-list">
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 8l3 3 7-7"/>
+                            </svg>
+                            ITAR-controlled technical data
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 8l3 3 7-7"/>
+                            </svg>
+                            CUI and export-controlled specs
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 8l3 3 7-7"/>
+                            </svg>
+                            CAD models & engineering drawings
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 8l3 3 7-7"/>
+                            </svg>
+                            Program names & contract details
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 8l3 3 7-7"/>
+                            </svg>
+                            QuantumBridge de-ID/re-ID engine
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 8l3 3 7-7"/>
+                            </svg>
+                            Full audit trail (WORM storage)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="divider">
+                    <div class="divider-label">Export Boundary</div>
+                </div>
+
+                <div class="boundary boundary-uncleared">
+                    <div class="boundary-label">External AI</div>
+                    <div class="boundary-title">What Crosses Out</div>
+                    <ul class="boundary-list">
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="8" cy="8" r="6"/>
+                                <path d="M8 5v6M5 8h6" transform="rotate(45 8 8)"/>
+                            </svg>
+                            Generic technical queries (de-identified)
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="8" cy="8" r="6"/>
+                                <path d="M8 5v6M5 8h6" transform="rotate(45 8 8)"/>
+                            </svg>
+                            Tokenized part references
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="8" cy="8" r="6"/>
+                                <path d="M8 5v6M5 8h6" transform="rotate(45 8 8)"/>
+                            </svg>
+                            Sanitized dimensions/tolerances
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="8" cy="8" r="6"/>
+                                <path d="M8 5v6M5 8h6" transform="rotate(45 8 8)"/>
+                            </svg>
+                            Zero program identifiers
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="8" cy="8" r="6"/>
+                                <path d="M8 5v6M5 8h6" transform="rotate(45 8 8)"/>
+                            </svg>
+                            Zero controlled technical data
+                        </li>
+                        <li>
+                            <svg class="list-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="8" cy="8" r="6"/>
+                                <path d="M8 5v6M5 8h6" transform="rotate(45 8 8)"/>
+                            </svg>
+                            Zero CUI or ITAR content
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 4: COMPLIANCE MATRIX
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="compliance">
+        <div class="compliance-header">
+            <div class="section-label">Compliance</div>
+            <h2 class="compliance-title">Built for your audit.</h2>
+        </div>
+
+        <div class="compliance-matrix">
+            <div class="compliance-item">
+                <div class="compliance-acronym">ITAR</div>
+                <div class="compliance-name">Arms Regulations</div>
+                <div class="compliance-status">
+                    <span class="status-dot"></span>
+                    Compliant
+                </div>
+            </div>
+
+            <div class="compliance-item">
+                <div class="compliance-acronym">EAR</div>
+                <div class="compliance-name">Export Administration</div>
+                <div class="compliance-status">
+                    <span class="status-dot"></span>
+                    Compliant
+                </div>
+            </div>
+
+            <div class="compliance-item">
+                <div class="compliance-acronym">CMMC</div>
+                <div class="compliance-name">Level 2 Ready</div>
+                <div class="compliance-status">
+                    <span class="status-dot"></span>
+                    Aligned
+                </div>
+            </div>
+
+            <div class="compliance-item">
+                <div class="compliance-acronym">DFARS</div>
+                <div class="compliance-name">7012 / 7021</div>
+                <div class="compliance-status">
+                    <span class="status-dot"></span>
+                    Compliant
+                </div>
+            </div>
+
+            <div class="compliance-item">
+                <div class="compliance-acronym">NIST</div>
+                <div class="compliance-name">800-171 / 800-53</div>
+                <div class="compliance-status">
+                    <span class="status-dot"></span>
+                    Mapped
+                </div>
+            </div>
+
+            <div class="compliance-item">
+                <div class="compliance-acronym">FedRAMP</div>
+                <div class="compliance-name">High Baseline</div>
+                <div class="compliance-status">
+                    <span class="status-dot"></span>
+                    Compatible
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 5: USE CASES
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="usecases">
+        <div class="usecases-header">
+            <div class="section-label">Applications</div>
+            <h2 class="usecases-title">Where AI accelerates the mission.</h2>
+        </div>
+
+        <div class="usecases-grid">
+            <div class="usecase-card">
+                <div class="usecase-number">01</div>
+                <div class="usecase-title">Technical Documentation</div>
+                <div class="usecase-desc">Generate maintenance procedures, tech manuals, and IETMs from engineering data without exposing controlled specifications.</div>
+                <div class="usecase-data">
+                    <div class="usecase-stat">
+                        <span class="stat-value">60%</span>
+                        <span class="stat-label">Faster drafting</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usecase-card">
+                <div class="usecase-number">02</div>
+                <div class="usecase-title">Proposal Support</div>
+                <div class="usecase-desc">AI-assisted RFP responses, compliance matrices, and boilerplate generation—all program details stay classified.</div>
+                <div class="usecase-data">
+                    <div class="usecase-stat">
+                        <span class="stat-value">3×</span>
+                        <span class="stat-label">Proposal throughput</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usecase-card">
+                <div class="usecase-number">03</div>
+                <div class="usecase-title">Engineering Analysis</div>
+                <div class="usecase-desc">Query AI about materials, tolerances, and design patterns. Actual part numbers and geometries never leave.</div>
+                <div class="usecase-data">
+                    <div class="usecase-stat">
+                        <span class="stat-value">40%</span>
+                        <span class="stat-label">Research time saved</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usecase-card">
+                <div class="usecase-number">04</div>
+                <div class="usecase-title">Supply Chain Intelligence</div>
+                <div class="usecase-desc">Analyze supplier data, forecast disruptions, and optimize logistics—vendor relationships and contracts protected.</div>
+                <div class="usecase-data">
+                    <div class="usecase-stat">
+                        <span class="stat-value">$2M+</span>
+                        <span class="stat-label">Annual savings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 6: THE GUARANTEE
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="guarantee">
+        <div class="guarantee-content">
+            <p class="guarantee-statement">
+                Your FSO signs off.<br>
+                Your DCSA audit passes.<br>
+                Your engineers get AI.
+            </p>
+            <p class="guarantee-sub">
+                QuantumBridge deploys inside your cleared facility. 
+                Export-controlled data never crosses the boundary. 
+                Full audit trail for every query.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 7: CTA
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="cta">
+        <div class="cta-content">
+            <div class="cta-classification">Unclassified // FOUO</div>
+            
+            <h2 class="cta-headline">
+                Ready to give your team<br>AI without the export risk?
+            </h2>
+            
+            <div class="cta-buttons">
+                <a href="https://inquantum.ai/aerospace/demo" class="btn btn-primary">Request Security Assessment</a>
+                <a href="https://inquantum.ai/aerospace/whitepaper" class="btn btn-secondary">Architecture Whitepaper</a>
+            </div>
+
+            <div class="cta-footer">
+                <svg class="cta-logo" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.6" d="M 32 25 Q 64 8, 96 25" />
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.2" d="M 96 25 L 110 64 L 96 103" />
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.6" d="M 96 103 Q 64 120, 32 103" />
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.6" d="M 32 103 L 18 64 L 32 25" />
+                </svg>
+                <div class="cta-tagline">The Compliance Layer for AI</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.violation-card, .compliance-item, .usecase-card, .boundary').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

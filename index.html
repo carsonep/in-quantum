@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Quantum | Unified Portal</title>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@200;300;400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           PORTAL SHELL (Sidebar & Mobile Nav)
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --nav-width: 260px;
+            --portal-bg: #050505;
+            --portal-border: rgba(255,255,255,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--portal-bg);
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- MOBILE HEADER --- */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 60px;
+            background: #080808;
+            border-bottom: 1px solid var(--portal-border);
+            z-index: 5000;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .mobile-logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: white;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hamburger-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* --- SIDEBAR --- */
+        .portal-nav {
+            width: var(--nav-width);
+            background: #080808;
+            border-right: 1px solid var(--portal-border);
+            display: flex;
+            flex-direction: column;
+            padding: 32px 0;
+            flex-shrink: 0;
+            z-index: 4000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .portal-logo-desktop {
+            padding: 0 32px;
+            margin-bottom: 48px;
+            color: white;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-group { margin-bottom: 32px; }
+
+        .nav-label {
+            padding: 0 32px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 32px;
+            background: transparent;
+            border: none;
+            color: #999;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover { background: rgba(255,255,255,0.03); color: white; }
+        .nav-btn.active {
+            background: rgba(232, 197, 71, 0.05);
+            color: #E8C547;
+            border-left-color: #E8C547;
+        }
+
+        /* --- CONTENT AREA --- */
+        #content-area {
+            flex-grow: 1;
+            position: relative;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            background: #000; /* Default background */
+        }
+
+        /* --- LOADING SPINNER --- */
+        #loader {
+            display: none;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .mobile-header { display: flex; }
+            .portal-nav {
+                position: fixed; top: 60px; left: 0; bottom: 0; width: 100%;
+                background: #080808; transform: translateX(-100%);
+            }
+            .portal-nav.nav-open { transform: translateX(0); }
+            .portal-logo-desktop { display: none; }
+            #content-area { padding-top: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="mobile-header">
+        <div class="mobile-logo">IN QUANTUM</div>
+        <button class="hamburger-btn" onclick="toggleNav()">☰</button>
+    </header>
+
+    <nav class="portal-nav" id="portalNav">
+        <div class="portal-logo-desktop">IN QUANTUM</div>
+
+        <div class="nav-group">
+            <div class="nav-label">Initiatives</div>
+            <button class="nav-btn active" data-page="odin_initiative_brand.html">The Odin Initiative</button>
+            <button class="nav-btn" data-page="munin_417_product.html">MUNIN-417 Core</button>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">QuantumBridge</div>
+            <button class="nav-btn" data-page="quantumbridge-careflyer.html">Healthcare</button>
+            <button class="nav-btn" data-page="quantumbridge-legal.html">Legal</button>
+            <button class="nav-btn" data-page="quantumbridge-aerospace.html">Aerospace</button>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">Resources</div>
+            <button class="nav-btn" data-page="marketing_campaigns.html">Campaigns</button>
+            <button class="nav-btn" data-page="quantumbridge_onepager-1.html">One Pager</button>
+        </div>
+    </nav>
+
+    <main id="content-area">
+        <div id="loader">LOADING...</div>
+        <div id="dynamic-content">
+            </div>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Load default page (Brand) on startup
+            loadPage('odin_initiative_brand.html');
+
+            // 2. Handle Navigation Clicks
+            $('.nav-btn').click(function(e) {
+                e.preventDefault();
+                
+                // Get filename from data attribute
+                const page = $(this).attr('data-page');
+                
+                // Update active state
+                $('.nav-btn').removeClass('active');
+                $(this).addClass('active');
+
+                // Load content
+                loadPage(page);
+
+                // Close mobile menu if open
+                $('#portalNav').removeClass('nav-open');
+            });
+        });
+
+        function loadPage(url) {
+            $('#loader').show();
+            $('#dynamic-content').hide();
+
+            // jQuery .load() fetches the file and inserts it
+            $('#dynamic-content').load(url, function(response, status, xhr) {
+                $('#loader').hide();
+                if (status == "error") {
+                    $('#dynamic-content').html(
+                        '<div style="color:white; padding:40px; text-align:center;">' + 
+                        '<h1>Error Loading Page</h1>' + 
+                        '<p>Please ensure you are running this on a Local Server (not file://)</p>' +
+                        '<p>Error: ' + xhr.status + " " + xhr.statusText + '</p></div>'
+                    ).show();
+                } else {
+                    $('#dynamic-content').show();
+                    // Scroll to top
+                    $('#content-area').scrollTop(0);
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleNav() {
+            $('#portalNav').toggleClass('nav-open');
+        }
+    </script>
+</body>
+</html>

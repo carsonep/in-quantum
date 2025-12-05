@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumBridge — Legal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --cubist: #F5F7FA;
+            --fragment-red: #C13832;
+            --liminal: #E8C547;
+            --white: #FFFFFF;
+            --parchment: #FAF9F7;
+            --ink: #1a1a1a;
+            --gold: #9A7B4F;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--parchment);
+            color: var(--ink);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 1: THE HOOK — PRIVILEGED
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
+            background: var(--chagall);
+            color: var(--white);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(154, 123, 79, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(30, 58, 95, 0.3) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .privilege-stamp {
+            display: inline-block;
+            padding: 10px 28px;
+            border: 1px solid var(--gold);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 56px;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.2s forwards;
+        }
+
+        .logo-container {
+            margin-bottom: 56px;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.3s forwards;
+        }
+
+        .logo-mark {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+        }
+
+        .fragment {
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            opacity: 0.5;
+        }
+
+        .fragment-1 { opacity: 0.8; }
+        .fragment-2 { opacity: 0.2; }
+        .fragment-3 { opacity: 0.8; }
+        .fragment-4 { opacity: 0.8; }
+
+        .accent-pixel {
+            fill: var(--gold);
+            opacity: 1;
+        }
+
+        .wordmark {
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        .headline-primary {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(48px, 9vw, 110px);
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.0;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.4s forwards;
+        }
+
+        .headline-primary span {
+            display: block;
+        }
+
+        .headline-accent {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .headline-sub {
+            font-size: clamp(15px, 2vw, 19px);
+            font-weight: 300;
+            opacity: 0.5;
+            max-width: 520px;
+            margin: 0 auto;
+            letter-spacing: 0.3px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.5s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.8s forwards, pulse 2.5s ease-in-out 1.5s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            opacity: 0.25;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 2: THE TENSION
+           ═══════════════════════════════════════════════════════════════ */
+
+        .tension {
+            padding: 160px 40px;
+            background: var(--parchment);
+            color: var(--ink);
+        }
+
+        .tension-header {
+            max-width: 800px;
+            margin: 0 auto 64px;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 40px;
+        }
+
+        .tension-question {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        .tension-question em {
+            font-style: italic;
+            color: var(--fragment-red);
+        }
+
+        .ethics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .ethics-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .ethics-item {
+            background: var(--white);
+            padding: 40px 32px;
+            transition: all 0.3s ease;
+            text-align: left;
+            border-left: 3px solid var(--gold);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .ethics-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+        }
+
+        .ethics-rule {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .ethics-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: var(--chagall);
+        }
+
+        .ethics-desc {
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.6;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 3: THE SOLUTION — ELEGANT
+           ═══════════════════════════════════════════════════════════════ */
+
+        .solution {
+            padding: 160px 40px;
+            background: var(--parchment);
+            color: var(--ink);
+        }
+
+        .solution-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .solution-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 300;
+            letter-spacing: -0.5px;
+        }
+
+        .solution-visual {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        .solution-side {
+            padding: 56px 48px;
+            background: var(--white);
+        }
+
+        .side-label {
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 32px;
+        }
+
+        .side-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .side-list {
+            list-style: none;
+        }
+
+        .side-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.7;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .side-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-marker {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .solution-center {
+            width: 120px;
+            background: var(--chagall);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .center-logo {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 16px;
+        }
+
+        .center-name {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--white);
+            opacity: 0.5;
+        }
+
+        .center-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--gold);
+            opacity: 0.3;
+        }
+
+        .center-line-left { left: 0; }
+        .center-line-right { right: 0; }
+
+        @media (max-width: 800px) {
+            .solution-visual {
+                grid-template-columns: 1fr;
+            }
+            .solution-center {
+                width: 100%;
+                height: 80px;
+                flex-direction: row;
+                padding: 20px;
+            }
+            .center-name {
+                writing-mode: horizontal-tb;
+                transform: none;
+                margin-left: 16px;
+            }
+            .center-line {
+                width: 100%;
+                height: 1px;
+                top: 0;
+                bottom: auto;
+            }
+            .center-line-right {
+                top: auto;
+                bottom: 0;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 4: HOW IT WORKS — WORKFLOW
+           ═══════════════════════════════════════════════════════════════ */
+
+        .workflow {
+            padding: 160px 40px;
+            background: var(--chagall);
+            color: var(--white);
+        }
+
+        .workflow-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .workflow-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 300;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1px;
+            background: rgba(255,255,255,0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .workflow-step {
+            background: var(--chagall);
+            padding: 48px 40px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .workflow-step:hover {
+            background: var(--moonlit);
+        }
+
+        .step-number {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            opacity: 0.3;
+            margin-bottom: 24px;
+        }
+
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 24px;
+            opacity: 0.7;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.5;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 5: USE CASES
+           ═══════════════════════════════════════════════════════════════ */
+
+        .usecases {
+            padding: 160px 40px;
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        .usecases-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .usecases-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 300;
+        }
+
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .usecase-card {
+            padding: 48px 40px;
+            background: var(--parchment);
+            border-left: 2px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .usecase-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.08);
+        }
+
+        .usecase-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .usecase-desc {
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.6;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .usecase-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--chagall);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 6: THE PROMISE
+           ═══════════════════════════════════════════════════════════════ */
+
+        .promise {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px;
+            background: var(--parchment);
+            color: var(--ink);
+            text-align: center;
+        }
+
+        .promise-content {
+            max-width: 700px;
+        }
+
+        .promise-quote {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 40px;
+        }
+
+        .promise-attribution {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 7: TRUST MARKERS
+           ═══════════════════════════════════════════════════════════════ */
+
+        .trust {
+            padding: 100px 40px;
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        .trust-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 64px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .trust-item {
+            text-align: center;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .trust-item:hover {
+            opacity: 0.8;
+        }
+
+        .trust-value {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 4px;
+        }
+
+        .trust-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 8: CTA
+           ═══════════════════════════════════════════════════════════════ */
+
+        .cta {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px;
+            background: var(--chagall);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-headline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .cta-sub {
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.5;
+            margin-bottom: 56px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .btn {
+            padding: 18px 44px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--chagall);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .cta-footer {
+            margin-top: 60px;
+        }
+
+        .cta-logo {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 12px;
+            opacity: 0.4;
+        }
+
+        .cta-tagline {
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.2;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════════════ */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.25; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+            .hero { padding: 60px 24px; }
+            .tension, .solution, .workflow, .usecases, .trust { padding: 100px 24px; }
+            .solution-side { padding: 40px 24px; }
+            .usecase-card, .workflow-step { padding: 32px 24px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; text-align: center; }
+            .trust-grid { gap: 40px; }
+        }
+
+        @media print {
+            section { page-break-inside: avoid; min-height: auto; }
+            .scroll-indicator { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 1: THE HOOK
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="privilege-stamp">Attorney-Client Privilege</div>
+            
+            <div class="logo-container">
+                <svg class="logo-mark" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <path class="fragment fragment-1" d="M 32 25 Q 64 8, 96 25" />
+                    <path class="fragment fragment-2" d="M 96 25 L 110 64 L 96 103" />
+                    <path class="fragment fragment-3" d="M 96 103 Q 64 120, 32 103" />
+                    <path class="fragment fragment-4" d="M 32 103 L 18 64 L 32 25" />
+                    <rect class="accent-pixel" x="110" y="24" width="3" height="3" />
+                </svg>
+                <div class="wordmark">QuantumBridge</div>
+            </div>
+            
+            <h1 class="headline-primary">
+                <span>The privilege</span>
+                <span><span class="headline-accent">remains.</span></span>
+            </h1>
+            
+            <p class="headline-sub">
+                Client confidences never leave your firm's boundary.
+                AI capabilities come to you. Nothing privileged goes out.
+            </p>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 2: THE TENSION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="tension">
+        <div class="tension-header">
+            <div class="section-label">The Dilemma</div>
+            
+            <p class="tension-question">
+                Your associates are already using AI.<br>
+                The question is whether you <em>know about it.</em>
+            </p>
+        </div>
+
+        <div class="ethics-grid">
+            <div class="ethics-item">
+                <div class="ethics-rule">Model Rule 1.6</div>
+                <div class="ethics-title">Confidentiality</div>
+                <div class="ethics-desc">A lawyer shall not reveal information relating to representation without informed consent.</div>
+            </div>
+
+            <div class="ethics-item">
+                <div class="ethics-rule">Model Rule 1.1</div>
+                <div class="ethics-title">Competence</div>
+                <div class="ethics-desc">A lawyer shall provide competent representation—including understanding technology's benefits and risks.</div>
+            </div>
+
+            <div class="ethics-item">
+                <div class="ethics-rule">Model Rule 5.3</div>
+                <div class="ethics-title">Supervision</div>
+                <div class="ethics-desc">Partners must ensure non-lawyer assistance (including AI tools) complies with professional obligations.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 3: THE SOLUTION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="solution">
+        <div class="solution-content">
+            <div class="solution-header">
+                <div class="section-label">The Architecture</div>
+                <h2 class="solution-title">Privilege preserved. Capability unlocked.</h2>
+            </div>
+
+            <div class="solution-visual">
+                <div class="solution-side">
+                    <div class="side-label">Inside Your Firm</div>
+                    <div class="side-title">What stays protected</div>
+                    <ul class="side-list">
+                        <li><span class="list-marker"></span>Client names and matter details</li>
+                        <li><span class="list-marker"></span>Privileged communications</li>
+                        <li><span class="list-marker"></span>Work product and strategy</li>
+                        <li><span class="list-marker"></span>Contract terms and deal structures</li>
+                        <li><span class="list-marker"></span>Litigation facts and evidence</li>
+                        <li><span class="list-marker"></span>Full audit trail (your control)</li>
+                    </ul>
+                </div>
+
+                <div class="solution-center">
+                    <div class="center-line center-line-left"></div>
+                    <svg class="center-logo" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                        <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.8" d="M 32 25 Q 64 8, 96 25" />
+                        <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.2" d="M 96 25 L 110 64 L 96 103" />
+                        <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.8" d="M 96 103 Q 64 120, 32 103" />
+                        <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.8" d="M 32 103 L 18 64 L 32 25" />
+                    </svg>
+                    <div class="center-name">QuantumBridge</div>
+                    <div class="center-line center-line-right"></div>
+                </div>
+
+                <div class="solution-side">
+                    <div class="side-label">To External AI</div>
+                    <div class="side-title">What leaves (de-identified)</div>
+                    <ul class="side-list">
+                        <li><span class="list-marker"></span>Generic legal questions</li>
+                        <li><span class="list-marker"></span>Anonymized clause patterns</li>
+                        <li><span class="list-marker"></span>Tokenized party references</li>
+                        <li><span class="list-marker"></span>Sanitized fact patterns</li>
+                        <li><span class="list-marker"></span>Zero client identifiers</li>
+                        <li><span class="list-marker"></span>Zero privileged content</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 4: WORKFLOW
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="workflow">
+        <div class="workflow-header">
+            <div class="section-label">How It Works</div>
+            <h2 class="workflow-title">Four steps. Full protection.</h2>
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">01</div>
+                <svg class="step-icon" viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.5">
+                    <rect x="8" y="6" width="32" height="36" rx="2"/>
+                    <path d="M14 14h20M14 22h20M14 30h12"/>
+                </svg>
+                <div class="step-title">Upload</div>
+                <div class="step-desc">Documents enter QuantumBridge inside your infrastructure</div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">02</div>
+                <svg class="step-icon" viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.5">
+                    <circle cx="24" cy="24" r="16"/>
+                    <path d="M24 16v8l6 6"/>
+                    <path d="M16 8L8 16M32 8l8 8M16 40l-8-8M32 40l8-8"/>
+                </svg>
+                <div class="step-title">De-identify</div>
+                <div class="step-desc">Client names, matter details, and privileged content are tokenized</div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">03</div>
+                <svg class="step-icon" viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.5">
+                    <circle cx="24" cy="24" r="16"/>
+                    <circle cx="24" cy="24" r="6"/>
+                    <path d="M24 8v4M24 36v4M8 24h4M36 24h4"/>
+                </svg>
+                <div class="step-title">Process</div>
+                <div class="step-desc">Only de-identified queries reach the AI via private connection</div>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">04</div>
+                <svg class="step-icon" viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.5">
+                    <path d="M24 4L4 12v12c0 11 8.5 18 20 22 11.5-4 20-11 20-22V12L24 4z"/>
+                    <path d="M16 24l6 6 10-10"/>
+                </svg>
+                <div class="step-title">Return</div>
+                <div class="step-desc">Results re-identified and delivered. Full audit logged.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 5: USE CASES
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="usecases">
+        <div class="usecases-header">
+            <div class="section-label">Applications</div>
+            <h2 class="usecases-title">Where AI transforms legal work.</h2>
+        </div>
+
+        <div class="usecases-grid">
+            <div class="usecase-card">
+                <div class="usecase-title">Contract Review</div>
+                <div class="usecase-desc">AI-powered analysis of agreements, risk flagging, and clause comparison—without exposing deal terms or counterparty names.</div>
+                <div class="usecase-stat">
+                    <span class="stat-value">70%</span>
+                    <span class="stat-label">faster first review</span>
+                </div>
+            </div>
+
+            <div class="usecase-card">
+                <div class="usecase-title">Due Diligence</div>
+                <div class="usecase-desc">Accelerate M&A document review. Extract key provisions, identify risks, and summarize findings. Target names stay confidential.</div>
+                <div class="usecase-stat">
+                    <span class="stat-value">3×</span>
+                    <span class="stat-label">review throughput</span>
+                </div>
+            </div>
+
+            <div class="usecase-card">
+                <div class="usecase-title">Legal Research</div>
+                <div class="usecase-desc">Query case law, statutes, and regulations with fact patterns from your matters—de-identified before they reach any AI.</div>
+                <div class="usecase-stat">
+                    <span class="stat-value">40%</span>
+                    <span class="stat-label">research time saved</span>
+                </div>
+            </div>
+
+            <div class="usecase-card">
+                <div class="usecase-title">Document Drafting</div>
+                <div class="usecase-desc">Generate first drafts of briefs, memos, and correspondence. Context-aware, privilege-protected, partner-reviewed.</div>
+                <div class="usecase-stat">
+                    <span class="stat-value">50%</span>
+                    <span class="stat-label">faster drafting</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 6: THE PROMISE
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="promise">
+        <div class="promise-content">
+            <p class="promise-quote">
+                "The duty of confidentiality is not suspended because technology is convenient."
+            </p>
+            <p class="promise-attribution">
+                QuantumBridge ensures it never has to be.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 7: TRUST MARKERS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="trust">
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="trust-value">SOC 2</div>
+                <div class="trust-label">Type II Certified</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-value">ABA</div>
+                <div class="trust-label">Ethics Aligned</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-value">BYOK</div>
+                <div class="trust-label">Your Keys</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-value">7 Year</div>
+                <div class="trust-label">Audit Retention</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SECTION 8: CTA
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2 class="cta-headline">
+                Ready to give your firm<br>AI without the ethics risk?
+            </h2>
+            <p class="cta-sub">
+                Deploy inside your infrastructure. Client data never leaves.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="https://inquantum.ai/legal/demo" class="btn btn-primary">Request a Briefing</a>
+                <a href="https://inquantum.ai/legal/whitepaper" class="btn btn-secondary">Ethics Whitepaper</a>
+            </div>
+
+            <div class="cta-footer">
+                <svg class="cta-logo" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.6" d="M 32 25 Q 64 8, 96 25" />
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.2" d="M 96 25 L 110 64 L 96 103" />
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.6" d="M 96 103 Q 64 120, 32 103" />
+                    <path style="fill:none;stroke:white;stroke-width:1.5;opacity:0.6" d="M 32 103 L 18 64 L 32 25" />
+                </svg>
+                <div class="cta-tagline">The Compliance Layer for AI</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.ethics-item, .workflow-step, .usecase-card, .trust-item, .solution-side').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

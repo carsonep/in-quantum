@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Should Show Its Work | In Quantum</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --raven-black: #0A0A0A;
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --odin-silver: #C0C5CE;
+            --cubist-white: #F5F7FA;
+            --fragment-red: #C13832;
+            --valhalla-gold: #E8C547;
+            --mimir-cyan: #00ACC1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cubist-white);
+            color: var(--chagall);
+            line-height: 1.6;
+        }
+
+        /* Full-bleed sections */
+        .section-full {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        /* Hero - Manifesto */
+        .hero-manifesto {
+            background: var(--chagall);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--valhalla-gold);
+            margin-bottom: 32px;
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 300;
+            letter-spacing: -3px;
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+
+        .hero-title strong {
+            font-weight: 600;
+        }
+
+        .manifesto-text {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--odin-silver);
+            line-height: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .manifesto-text strong {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Campaign Sections */
+        .campaign-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .campaign-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px;
+        }
+
+        .campaign-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+        }
+
+        .campaign-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--fragment-red);
+            margin-bottom: 16px;
+        }
+
+        .campaign-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .campaign-text {
+            font-size: 18px;
+            color: var(--moonlit);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        /* Campaign 1: Glass Box */
+        .campaign-glass {
+            background: var(--chagall);
+        }
+
+        .campaign-glass .campaign-content {
+            color: white;
+        }
+
+        .campaign-glass .campaign-text {
+            color: var(--odin-silver);
+        }
+
+        .glass-box-visual {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .box-demo {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            transition: all 500ms ease;
+        }
+
+        .black-box-demo {
+            background: var(--raven-black);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .glass-box-demo {
+            background: linear-gradient(135deg, rgba(0,172,193,0.2), rgba(232,197,71,0.2));
+            border: 2px solid var(--mimir-cyan);
+            position: relative;
+        }
+
+        .glass-box-demo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0,172,193,0.3) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(0,172,193,0.3) 50%, transparent 51%);
+            background-size: 20px 20px;
+        }
+
+        .vs-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--odin-silver);
+        }
+
+        /* Campaign 2: Show Your Work */
+        .campaign-work {
+            background: white;
+        }
+
+        .work-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .paper {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 300px;
+        }
+
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 12px;
+            color: var(--moonlit);
+        }
+
+        .paper-content {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .paper-grade {
+            text-align: right;
+            margin-top: 16px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .paper-good .paper-grade {
+            color: var(--mimir-cyan);
+        }
+
+        .paper-bad .paper-grade {
+            color: var(--fragment-red);
+        }
+
+        .paper-good {
+            border-color: var(--mimir-cyan);
+        }
+
+        .paper-bad {
+            border-color: var(--fragment-red);
+        }
+
+        /* Campaign 3: The 2% */
+        .campaign-error {
+            background: var(--raven-black);
+            color: white;
+        }
+
+        .campaign-error .campaign-text {
+            color: var(--odin-silver);
+        }
+
+        .error-visual {
+            text-align: center;
+        }
+
+        .error-comparison {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .error-number {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+
+        .error-bad {
+            font-size: 120px;
+            color: var(--fragment-red);
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .error-arrow {
+            font-size: 48px;
+            color: var(--odin-silver);
+        }
+
+        .error-good {
+            font-size: 120px;
+            color: var(--mimir-cyan);
+        }
+
+        .error-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: var(--odin-silver);
+            margin-top: 24px;
+        }
+
+        /* Campaign 4: Ravens Remember */
+        .campaign-memory {
+            background: linear-gradient(135deg, var(--chagall) 0%, var(--moonlit) 100%);
+            color: white;
+        }
+
+        .campaign-memory .campaign-text {
+            color: var(--odin-silver);
+        }
+
+        .memory-visual {
+            position: relative;
+        }
+
+        .raven-eye {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--valhalla-gold) 0%, var(--raven-black) 40%, var(--chagall) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 100px rgba(232, 197, 71, 0.3);
+        }
+
+        .raven-pupil {
+            width: 80px;
+            height: 80px;
+            background: var(--raven-black);
+            border-radius: 50%;
+        }
+
+        .memory-chains {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-left: 32px;
+        }
+
+        .chain-item {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            padding: 8px 16px;
+            background: rgba(0,172,193,0.2);
+            border-left: 2px solid var(--mimir-cyan);
+            white-space: nowrap;
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: var(--valhalla-gold);
+            color: var(--raven-black);
+            padding: 80px 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item .stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .stat-item .stat-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: var(--chagall);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 300;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            color: var(--odin-silver);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 300ms ease;
+        }
+
+        .btn-gold {
+            background: var(--valhalla-gold);
+            color: var(--raven-black);
+        }
+
+        .btn-gold:hover {
+            background: white;
+        }
+
+        .btn-outline {
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--raven-black);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--raven-black);
+            color: var(--odin-silver);
+            padding: 48px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .campaign-section {
+                grid-template-columns: 1fr;
+            }
+
+            .campaign-visual {
+                padding: 60px 40px;
+            }
+
+            .campaign-content {
+                padding: 60px 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .glass-box-visual {
+                flex-direction: column;
+            }
+
+            .memory-chains {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Manifesto -->
+    <section class="section-full hero-manifesto">
+        <div class="hero-content">
+            <div class="hero-eyebrow">A Manifesto</div>
+            <h1 class="hero-title">We believe AI should <strong>show its work.</strong></h1>
+            <p class="manifesto-text">
+                In 2023, AI became genuinely intelligent.<br>
+                And enterprises couldn't use it.<br><br>
+                Not because it wasn't powerful—<strong>GPT-4 is miraculous.</strong><br>
+                But because it couldn't be trusted where trust matters most.<br><br>
+                Hospitals. Banks. Aerospace. Government.<br><br>
+                These organizations don't need AI that's probably right.<br>
+                <strong>They need AI that can prove it's right.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Campaign 1: The Glass Box -->
+    <section class="campaign-section campaign-glass">
+        <div class="campaign-visual">
+            <div class="glass-box-visual">
+                <div class="box-demo black-box-demo">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="#0A0A0A">
+                        <rect x="4" y="4" width="40" height="40"/>
+                    </svg>
+                </div>
+                <div class="vs-text">vs</div>
+                <div class="box-demo glass-box-demo">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#00ACC1" stroke-width="2">
+                        <polygon points="24,4 44,24 24,44 4,24" fill="rgba(0,172,193,0.3)"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="campaign-content">
+            <div class="campaign-label">Campaign 01</div>
+            <h2 class="campaign-title">Welcome to the Glass Box.</h2>
+            <p class="campaign-text">Your auditor asked how the AI made that decision. Your vendor said "it's complicated." We say: "Here's the complete reasoning chain, timestamped and traceable."</p>
+            <p class="campaign-text">LLMs are black boxes by design. The Verity Architecture is transparent by construction. Every inference visible. Every decision auditable. Every regulator satisfied.</p>
+        </div>
+    </section>
+
+    <!-- Campaign 2: Show Your Work -->
+    <section class="campaign-section campaign-work">
+        <div class="campaign-content">
+            <div class="campaign-label">Campaign 02</div>
+            <h2 class="campaign-title">Show your work.</h2>
+            <p class="campaign-text">In third grade, you learned that showing your work matters. In regulated industries, it's the law.</p>
+            <p class="campaign-text">MUNIN-417 shows its work. Every time. Complete reasoning chains from input to output. Not because we want to—because your compliance officer needs us to.</p>
+        </div>
+        <div class="campaign-visual">
+            <div class="work-visual">
+                <div class="paper paper-bad">
+                    <div class="paper-header">
+                        <span>LLM Output</span>
+                        <span>Audit</span>
+                    </div>
+                    <div class="paper-content">
+                        Answer: 72846<br>
+                        Work: [none]<br>
+                        Confidence: 87%<br>
+                        Reasoning: ???
+                    </div>
+                    <div class="paper-grade">See me.</div>
+                </div>
+                <div class="paper paper-good">
+                    <div class="paper-header">
+                        <span>Verity Output</span>
+                        <span>Audit</span>
+                    </div>
+                    <div class="paper-content">
+                        Answer: 72846<br>
+                        Step 1: Extract → DX<br>
+                        Step 2: Map → ICD-10<br>
+                        Step 3: Validate → ✓<br>
+                        Trace: [full log]
+                    </div>
+                    <div class="paper-grade">A+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaign 3: The 2% Problem -->
+    <section class="campaign-section campaign-error">
+        <div class="campaign-visual">
+            <div class="error-visual">
+                <div class="error-comparison">
+                    <span class="error-number error-bad">15%</span>
+                    <span class="error-arrow">→</span>
+                    <span class="error-number error-good">2%</span>
+                </div>
+                <div class="error-label">Error Rate Reduction</div>
+            </div>
+        </div>
+        <div class="campaign-content">
+            <div class="campaign-label">Campaign 03</div>
+            <h2 class="campaign-title">The 2% difference.</h2>
+            <p class="campaign-text">GPT-4's error rate in medical coding: 15%.<br>MUNIN-417's error rate: 2%.</p>
+            <p class="campaign-text">That 13% difference? It's millions in recovered revenue. It's audit survival. It's the difference between "probably compliant" and "provably compliant."</p>
+            <p class="campaign-text">It's why we exist.</p>
+        </div>
+    </section>
+
+    <!-- Campaign 4: Ravens Remember -->
+    <section class="campaign-section campaign-memory">
+        <div class="campaign-content">
+            <div class="campaign-label">Campaign 04</div>
+            <h2 class="campaign-title">Ravens remember.</h2>
+            <p class="campaign-text">Large language models are brilliant. They're also amnesiac—no persistent knowledge, no grounded reasoning, no memory of why they said what they said.</p>
+            <p class="campaign-text">MUNIN-417 remembers. Every symbol. Every inference. Every decision. The Raven remembers.</p>
+        </div>
+        <div class="campaign-visual">
+            <div class="memory-visual">
+                <div class="raven-eye">
+                    <div class="raven-pupil"></div>
+                </div>
+                <div class="memory-chains">
+                    <div class="chain-item">→ Input received: 14:32:07</div>
+                    <div class="chain-item">→ Symbol extracted: DX_PRIMARY</div>
+                    <div class="chain-item">→ Rule applied: ICD10_MAP_v3</div>
+                    <div class="chain-item">→ Confidence: 0.98</div>
+                    <div class="chain-item">→ Output logged: 72846</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">87%</div>
+                <div class="stat-label">Error Reduction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">97%</div>
+                <div class="stat-label">Less Data</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Explainable</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verity Gate Section -->
+    <section class="section-full" style="background: linear-gradient(180deg, #0B1B3D 0%, #0A0A0A 100%); color: white;">
+        <div class="hero-content" style="max-width: 900px;">
+            <div class="hero-eyebrow" style="color: #00ACC1;">The Innovation</div>
+            <h2 class="hero-title" style="font-size: clamp(32px, 5vw, 56px);">The Verity Gate</h2>
+            <p style="font-size: 18px; color: #C0C5CE; line-height: 1.8; margin-bottom: 48px;">
+                Six layers. One breakthrough. The Verity Gate sits between symbolic inference and executive decision—validating every reasoning step against domain knowledge before output.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 8px; align-items: center; font-family: 'Space Mono', monospace; font-size: 13px; flex-wrap: wrap;">
+                <span style="padding: 12px 16px; background: rgba(255,255,255,0.05);">P1 Sensory</span>
+                <span style="color: #C0C5CE;">→</span>
+                <span style="padding: 12px 16px; background: rgba(255,255,255,0.05);">C2 Semantic</span>
+                <span style="color: #C0C5CE;">→</span>
+                <span style="padding: 12px 16px; background: rgba(255,255,255,0.05);">M3 Salience</span>
+                <span style="color: #C0C5CE;">→</span>
+                <span style="padding: 12px 16px; background: rgba(255,255,255,0.05);">B4 Symbolic</span>
+                <span style="color: #C0C5CE;">→</span>
+                <span style="padding: 12px 16px; background: rgba(0,172,193,0.3); border: 1px solid #00ACC1; color: #00ACC1;">V4 VERITY</span>
+                <span style="color: #C0C5CE;">→</span>
+                <span style="padding: 12px 16px; background: rgba(255,255,255,0.05);">E5 Synthesis</span>
+            </div>
+            <p style="font-size: 14px; color: #00ACC1; margin-top: 32px; font-family: 'Space Mono', monospace;">
+                Where symbols meet truth. Where hallucinations die.
+            </p>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section-full final-cta">
+        <div class="hero-content">
+            <h2 class="cta-title">Everyone's building bigger models.<br>We're building better minds.</h2>
+            <p class="cta-subtitle">The compliance layer for enterprise AI. Starting where trust matters most.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-gold">Request Demo</a>
+                <a href="#" class="btn btn-outline">Read the Whitepaper</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        IN QUANTUM, INC. · THE ODIN INITIATIVE · DECEMBER 2025
+    </footer>
+</body>
+</html>

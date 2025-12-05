@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUNIN-417 | Cognitive Reasoning Core</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --raven-black: #0A0A0A;
+            --chagall: #0B1B3D;
+            --moonlit: #1E3A5F;
+            --odin-silver: #C0C5CE;
+            --cubist-white: #F5F7FA;
+            --fragment-red: #C13832;
+            --valhalla-gold: #E8C547;
+            --mimir-cyan: #00ACC1;
+            --yggdrasil-green: #2ECC71;
+            --terminal-green: #00FF41;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--raven-black);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 40px;
+            background: 
+                linear-gradient(180deg, var(--raven-black) 0%, rgba(11, 27, 61, 0.8) 100%),
+                radial-gradient(circle at 30% 50%, rgba(0, 172, 193, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--mimir-cyan);
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-size: 56px;
+            font-weight: 300;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 span {
+            color: var(--mimir-cyan);
+            font-weight: 600;
+        }
+
+        .hero-text .tagline {
+            font-size: 20px;
+            color: var(--odin-silver);
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .hero-text .description {
+            font-size: 16px;
+            color: var(--odin-silver);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 300ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cyan {
+            background: var(--mimir-cyan);
+            color: var(--raven-black);
+        }
+
+        .btn-cyan:hover {
+            background: white;
+        }
+
+        .btn-ghost {
+            border: 1px solid var(--odin-silver);
+            color: white;
+        }
+
+        .btn-ghost:hover {
+            background: white;
+            color: var(--raven-black);
+        }
+
+        /* Terminal Window */
+        .terminal {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+        }
+
+        .terminal-header {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #FF5F56; }
+        .terminal-dot.yellow { background: #FFBD2E; }
+        .terminal-dot.green { background: #27C93F; }
+
+        .terminal-title {
+            margin-left: 12px;
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
+
+        .terminal-body {
+            padding: 24px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+        }
+
+        .terminal-prompt {
+            color: var(--mimir-cyan);
+        }
+
+        .terminal-command {
+            color: white;
+        }
+
+        .terminal-output {
+            color: var(--odin-silver);
+        }
+
+        .terminal-success {
+            color: var(--yggdrasil-green);
+        }
+
+        .terminal-accent {
+            color: var(--valhalla-gold);
+        }
+
+        /* Architecture Section */
+        .section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--fragment-red);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        /* Architecture Diagram */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .arch-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 32px;
+            position: relative;
+            transition: all 300ms ease;
+        }
+
+        .arch-card:hover {
+            border-color: var(--mimir-cyan);
+            transform: translateY(-4px);
+        }
+
+        .arch-card-highlight {
+            background: rgba(0, 172, 193, 0.1);
+            border-color: var(--mimir-cyan);
+        }
+
+        .arch-card-highlight::before {
+            content: 'THE INNOVATION';
+            position: absolute;
+            top: -10px;
+            left: 24px;
+            background: var(--mimir-cyan);
+            color: var(--raven-black);
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+        }
+
+        .arch-icon {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--odin-silver);
+        }
+
+        .arch-card-highlight .arch-icon {
+            color: var(--mimir-cyan);
+        }
+
+        .arch-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--mimir-cyan);
+            margin-bottom: 8px;
+        }
+
+        .arch-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .arch-desc {
+            font-size: 14px;
+            color: var(--odin-silver);
+            line-height: 1.7;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            background: var(--chagall);
+            padding: 120px 40px;
+        }
+
+        .comparison-table {
+            max-width: 900px;
+            margin: 64px auto 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 16px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .comparison-table th:first-child {
+            color: var(--odin-silver);
+        }
+
+        .comparison-table th:nth-child(2) {
+            color: var(--fragment-red);
+        }
+
+        .comparison-table th:nth-child(3) {
+            color: var(--mimir-cyan);
+        }
+
+        .comparison-table td {
+            padding: 20px 24px;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table td:first-child {
+            color: var(--odin-silver);
+        }
+
+        .comparison-table .bad {
+            color: var(--fragment-red);
+        }
+
+        .comparison-table .good {
+            color: var(--yggdrasil-green);
+        }
+
+        /* Commands Section */
+        .commands-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .command-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            transition: all 300ms ease;
+        }
+
+        .command-item:hover {
+            border-color: var(--mimir-cyan);
+            background: rgba(0, 172, 193, 0.05);
+        }
+
+        .command-name {
+            color: var(--mimir-cyan);
+            min-width: 140px;
+        }
+
+        .command-desc {
+            color: var(--odin-silver);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(180deg, var(--chagall) 0%, var(--raven-black) 100%);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .big-quote {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 300;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .big-quote strong {
+            color: var(--valhalla-gold);
+        }
+
+        /* Install Section */
+        .install-section {
+            background: var(--raven-black);
+            padding: 120px 40px;
+            text-align: center;
+        }
+
+        .install-box {
+            max-width: 600px;
+            margin: 48px auto 0;
+        }
+
+        .install-command {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--mimir-cyan);
+            padding: 24px 32px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .install-command code {
+            color: var(--terminal-green);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--odin-silver);
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 200ms;
+        }
+
+        .copy-btn:hover {
+            color: white;
+        }
+
+        .install-note {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--odin-silver);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--raven-black);
+            padding: 48px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--odin-silver);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .arch-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="eyebrow">COGNITIVE REASONING CORE</div>
+                <h1>MUNIN<span>-417</span></h1>
+                <p class="tagline">"The Raven Remembers"</p>
+                <p class="description">Neural networks see patterns. Symbolic systems understand rules. MUNIN-417 does both—and shows its work. The first AI engine built for regulated industries where "probably right" isn't good enough.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-cyan">pip install munin417</a>
+                    <a href="#" class="btn btn-ghost">Documentation →</a>
+                </div>
+            </div>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">raven — zsh</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ </span>
+                        <span class="terminal-command">raven init</span>
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        <br>
+                        &nbsp;&nbsp;◉&nbsp;&nbsp;&nbsp;MUNIN-417 // The Odin Initiative<br>
+                        &nbsp;━┳━&nbsp;&nbsp;═══════════════════════════════<br>
+                        &nbsp;&nbsp;┃&nbsp;&nbsp;&nbsp;Cognitive Reasoning Core v2.1.0<br>
+                        &nbsp;╱&nbsp;╲<br>
+                        <br>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Created raven.yaml</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Domain: </span><span class="terminal-accent">medical_coding</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">[✓]</span> <span class="terminal-output">Audit mode: </span><span class="terminal-accent">HIPAA compliant</span>
+                    </div>
+                    <div class="terminal-line"><br></div>
+                    <div class="terminal-line terminal-output">
+                        The Raven is ready. Run `raven fly` to start.
+                    </div>
+                    <div class="terminal-line"><br></div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$ </span>
+                        <span class="terminal-command">raven fly</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-success">●</span> <span class="terminal-output">Inference server running on </span><span class="terminal-accent">localhost:8417</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">The Verity Architecture</div>
+            <h2 class="section-title">Six Layers. Complete Traceability.</h2>
+        </div>
+        
+        <div class="arch-grid">
+            <div class="arch-card">
+                <div class="arch-icon">P1</div>
+                <div class="arch-name">SENSORY LAYER</div>
+                <div class="arch-title">Raw Signal Processing</div>
+                <div class="arch-desc">Perception and intake. Raw data enters the stack, preprocessed for downstream analysis.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">C2</div>
+                <div class="arch-name">SEMANTIC LAYER</div>
+                <div class="arch-title">Contextual Embedding</div>
+                <div class="arch-desc">Meaning extraction. Neural networks identify patterns and build contextual understanding.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">M3</div>
+                <div class="arch-name">SALIENCE LAYER</div>
+                <div class="arch-title">Working Memory</div>
+                <div class="arch-desc">Active attention. The system holds what matters now, filtering noise from signal.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">B4</div>
+                <div class="arch-name">SYMBOLIC LAYER</div>
+                <div class="arch-title">Neuro-Symbolic Bridge</div>
+                <div class="arch-desc">Translation point. Neural representations become symbolic logic—auditable, traceable, explainable.</div>
+            </div>
+            <div class="arch-card arch-card-highlight">
+                <div class="arch-icon">V4</div>
+                <div class="arch-name">VERITY GATE</div>
+                <div class="arch-title">Knowledge Grounding</div>
+                <div class="arch-desc">The innovation. Every symbolic inference validated against domain truth before proceeding. This is where hallucinations die.</div>
+            </div>
+            <div class="arch-card">
+                <div class="arch-icon">E5</div>
+                <div class="arch-name">SYNTHESIS LAYER</div>
+                <div class="arch-title">Executive Decision</div>
+                <div class="arch-desc">Final authority. Grounded, verified reasoning chains produce auditable outputs.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison-section">
+        <div class="section-header">
+            <div class="section-label">The Difference</div>
+            <h2 class="section-title">LLMs guess. The Verity Architecture knows.</h2>
+        </div>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>Metric</th>
+                <th>LLMs (GPT-4)</th>
+                <th>MUNIN-417 + Verity Gate</th>
+            </tr>
+            <tr>
+                <td>Error Rate</td>
+                <td class="bad">15%</td>
+                <td class="good">2%</td>
+            </tr>
+            <tr>
+                <td>Training Data Required</td>
+                <td class="bad">Billions of examples</td>
+                <td class="good">~1,000 examples</td>
+            </tr>
+            <tr>
+                <td>Explainability</td>
+                <td class="bad">"It's complicated"</td>
+                <td class="good">Complete at V4 layer</td>
+            </tr>
+            <tr>
+                <td>Hallucination Risk</td>
+                <td class="bad">Inherent to architecture</td>
+                <td class="good">Eliminated at Verity Gate</td>
+            </tr>
+            <tr>
+                <td>Audit Trail</td>
+                <td class="bad">None</td>
+                <td class="good">P1 → C2 → M3 → B4 → V4 → E5</td>
+            </tr>
+            <tr>
+                <td>Compliance Ready</td>
+                <td class="bad">No</td>
+                <td class="good">HIPAA, FAA, SEC</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Commands -->
+    <section class="commands-section">
+        <div class="section-header">
+            <div class="section-label">The CLI</div>
+            <h2 class="section-title">Ravens fly on command.</h2>
+        </div>
+        
+        <div class="commands-grid">
+            <div class="command-item">
+                <span class="command-name">raven fly</span>
+                <span class="command-desc">Start inference server</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven hunt &lt;file&gt;</span>
+                <span class="command-desc">Process encounters</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven verity</span>
+                <span class="command-desc">Show V4 gate status</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven trace</span>
+                <span class="command-desc">Full layer trace P1→E5</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven calibrate</span>
+                <span class="command-desc">Run calibration suite</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven speak</span>
+                <span class="command-desc">Interactive REPL</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven whisper</span>
+                <span class="command-desc">Single inference</span>
+            </div>
+            <div class="command-item">
+                <span class="command-name">raven layers</span>
+                <span class="command-desc">Display Verity Architecture</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+        <p class="big-quote">"Your model got 94% accuracy. Congratulations.<br>Now explain the <strong>6% to a regulator.</strong>"</p>
+    </section>
+
+    <!-- Install -->
+    <section class="install-section">
+        <div class="section-header">
+            <div class="section-label">Get Started</div>
+            <h2 class="section-title">The Raven awaits.</h2>
+        </div>
+        
+        <div class="install-box">
+            <div class="install-command">
+                <code>pip install munin417</code>
+                <button class="copy-btn">Copy</button>
+            </div>
+            <p class="install-note">Requires Python 3.9+ · Runs on CPU · HIPAA audit mode included</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">IN QUANTUM, INC. · MUNIN-417 · THE VERITY ARCHITECTURE · DECEMBER 2025</p>
+    </footer>
+
+    <script>
+        document.querySelector('.copy-btn').addEventListener('click', function() {
+            navigator.clipboard.writeText('pip install munin417');
+            this.textContent = 'Copied';
+            setTimeout(() => this.textContent = 'Copy', 2000);
+        });
+    </script>
+</body>
+</html>
