@@ -17,6 +17,7 @@
             --nav-width: 260px;
             --portal-bg: #050505;
             --portal-border: rgba(255,255,255,0.1);
+            --accent: #E8C547;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,6 +28,83 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           LOGIN OVERLAY (New Section)
+           ═══════════════════════════════════════════════════════════════ */
+        #login-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #050505;
+            z-index: 10000; /* Highest layer */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .login-logo {
+            font-family: 'Space Mono', monospace;
+            color: white;
+            font-size: 16px;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .login-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--portal-border);
+            color: white;
+            padding: 15px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .login-btn {
+            background: white;
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: var(--accent);
+        }
+
+        .error-msg {
+            color: #ff4444;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            margin-top: 15px;
+            height: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         /* --- MOBILE HEADER --- */
@@ -113,8 +191,8 @@
         .nav-btn:hover { background: rgba(255,255,255,0.03); color: white; }
         .nav-btn.active {
             background: rgba(232, 197, 71, 0.05);
-            color: #E8C547;
-            border-left-color: #E8C547;
+            color: var(--accent);
+            border-left-color: var(--accent);
         }
 
         /* --- CONTENT AREA --- */
@@ -150,6 +228,15 @@
     </style>
 </head>
 <body>
+
+    <div id="login-overlay">
+        <div class="login-container">
+            <div class="login-logo">In Quantum</div>
+            <input type="password" id="access-code" class="login-input" placeholder="ENTER ACCESS CODE">
+            <button id="btn-authenticate" class="login-btn">Authenticate</button>
+            <div class="error-msg" id="login-error">ACCESS DENIED</div>
+        </div>
+    </div>
 
     <header class="mobile-header">
         <div class="mobile-logo">IN QUANTUM</div>
@@ -187,6 +274,48 @@
 
     <script>
         $(document).ready(function() {
+            // --- AUTHENTICATION LOGIC ---
+            
+            const SESSION_KEY = 'inquantum_auth_token';
+            const REQUIRED_PASS = 'inquantum2025!';
+
+            // Check if already logged in (optional: remove this if you want login on EVERY refresh)
+            if (sessionStorage.getItem(SESSION_KEY) === 'valid') {
+                $('#login-overlay').hide();
+            }
+
+            function attemptLogin() {
+                const inputVal = $('#access-code').val();
+                
+                if (inputVal === REQUIRED_PASS) {
+                    // Success
+                    $('#login-overlay').fadeOut(500);
+                    sessionStorage.setItem(SESSION_KEY, 'valid'); // Remembers login for this session
+                } else {
+                    // Fail
+                    $('#login-error').css('opacity', '1');
+                    $('#access-code').val(''); // Clear input
+                    
+                    // Shake effect logic
+                    $('.login-input').css('border-color', '#ff4444');
+                    setTimeout(() => {
+                        $('#login-error').css('opacity', '0');
+                        $('.login-input').css('border-color', 'rgba(255,255,255,0.1)');
+                    }, 2000);
+                }
+            }
+
+            // Click listener
+            $('#btn-authenticate').click(attemptLogin);
+
+            // Enter key listener
+            $('#access-code').keypress(function(e) {
+                if(e.which == 13) { attemptLogin(); }
+            });
+
+
+            // --- SITE LOGIC ---
+
             // 1. Load default page (Brand) on startup
             loadPage('odin_initiative_brand.html');
 
